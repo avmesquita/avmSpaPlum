@@ -1,0 +1,31 @@
+﻿
+@using DayPilot.Web.Mvc.Events.Month
+
+@section TitleContent {
+
+	AJAX Drag&amp;Drop Event Calendar
+
+}
+
+
+
+<script type="text/javascript">
+
+	function createEvent(start, end) {
+	    var name = prompt("New Event Name:", "New Event");
+	    if (!name) { return; }
+	    dp.timeRangeSelectedCallBack(start, end, { name: name });
+	    dp.clearSelection();
+	}
+
+</script>
+
+        @(Html.DayPilotMonth("dp", new DayPilotMonthConfig { 
+                BackendUrl = Url.Content("~/Month/Backend"),
+                
+                TimeRangeSelectedHandling = TimeRangeSelectedHandlingType.JavaScript,
+                TimeRangeSelectedJavaScript = "createEvent(start, end)",
+        }))
+
+
+

@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <li style="display:block;width:100%;text-align:left;">
+            @{
+                var nome = SpaPlum.Web.Models.UserExtendedModel.GetNome(HttpContext.Current.User); //new SpaPlum.Web.Controllers.AccountController().getClaimNome();
+                var email = User.Identity.GetUserName();
+                var display = (!string.IsNullOrEmpty(nome) ? nome : email);
+            }
+
+            @Html.ActionLink("Olá, " + display + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li style="display:block;width:100%;text-align:left;"><a href="javascript:document.getElementById('logoutForm').submit()">Sair</a></li>
+    }
+}
+else
+{
+    <li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Cadastrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Entrar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+}

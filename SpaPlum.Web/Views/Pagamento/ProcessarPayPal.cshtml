@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "ProcessarPayPal";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Processando Paypal</h2>
+
+<br><br>
+<div class="list-header clearfix">
+    <h2>Opa! Era para você ter sido redirecionado.</h2>
+    <h3>Alguma coisa não saiu como planejado.</h3>
+    <h4>Mas é sempre assim, né?!</h4>
+    <h5>Pensamos nisso!</h5>
+</div>
+<div class="list-sfs-holder">
+    <div class="alert alert-error">
+        Clica no botão aí embaixo que te transportamos para lá. <br>
+        <input type="button" value="Para o PayPal e Avante!" onclick="javascript:windows.location.href='@ViewBag.PayPalLink'"/>
+    </div>
+</div>

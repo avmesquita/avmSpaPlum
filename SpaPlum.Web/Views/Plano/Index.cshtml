@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.Plano>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VigenciaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VigenciaFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VigenciaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VigenciaFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preco)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CodigoPlano }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CodigoPlano }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CodigoPlano })
+        </td>
+    </tr>
+}
+
+</table>

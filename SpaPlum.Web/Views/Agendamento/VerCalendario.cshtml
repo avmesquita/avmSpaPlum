@@ -1,0 +1,61 @@
+﻿@using DayPilot.Web.Mvc;
+@using DayPilot.Web.Mvc.Events.Calendar;
+@using DayPilot.Web.Mvc.Enums.Calendar;
+@using ViewType = DayPilot.Web.Mvc.Enums.Calendar.ViewType
+
+@*
+    @model SpaPlum.Web.Models.Agendamento
+*@
+
+@{
+    ViewBag.Title = "Agenda da Semana";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/bundles/daypilot")
+@Styles.Render("~/Content/daypilottheme")
+
+<h2>Corpus SPA</h2>
+<h4>Agenda da Semana</h4>
+
+<style>
+    #toolbar {
+        margin-bottom: 10px;
+    }
+
+        #toolbar a {
+            display: inline-block;
+            height: 20px;
+            text-decoration: none;
+            padding: 5px;
+            color: #666;
+            border: 1px solid #aaa;
+            background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#e2e2e2));
+            background: -webkit-linear-gradient(top, #fafafa 0%, #e2e2e2);
+            background: -moz-linear-gradient(top, #fafafa 0%, #e2e2e2);
+            background: -ms-linear-gradient(top, #fafafa 0%, #e2e2e2);
+            background: -o-linear-gradient(top, #fafafa 0%, #e2e2e2);
+            background: linear-gradient(top, #fafafa 0%, #e2e2e2);
+            filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr="#fafafa", endColorStr="#e2e2e2");
+        }
+</style>
+
+@Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig {
+    BackendUrl = Url.Content("~/Calendario/Backend"),
+    CssOnly = true,
+    Theme = "calendar_white",
+    BusinessBeginsHour = 9,
+    BusinessEndsHour = 21,    
+    ViewType = ViewType.Week,
+    WeekStarts = DayPilot.Web.Mvc.Enums.WeekStarts.Sunday,
+    ShowToolTip = true,
+    EventMoveHandling = DayPilot.Web.Mvc.Events.Calendar.EventMoveHandlingType.CallBack,
+    EventResizeHandling = DayPilot.Web.Mvc.Events.Calendar.EventResizeHandlingType.CallBack,
+    EventClickHandling = DayPilot.Web.Mvc.Events.Calendar.EventClickHandlingType.CallBack    
+})
+
+<script language="javascript">
+   dpc.onEventClicked = function (args) {
+       alert("clicked: " + args.e.id());
+   };
+</script>

@@ -1,0 +1,83 @@
+﻿@model SpaPlum.Web.Entity.AgendamentoItemServico
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AgendamentoItemServico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Agendamento.NomeCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agendamento.NomeCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoServico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoServico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorComissaoEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorComissaoEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorComissaoTerapeuta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorComissaoTerapeuta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmPromocao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmPromocao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempoAproximadoDoServico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempoAproximadoDoServico)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoAgendamentoItemServico }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

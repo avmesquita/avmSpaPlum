@@ -1,0 +1,97 @@
+﻿@model SpaPlum.Web.Entity.Email
+
+@{
+    ViewBag.Title = "Detalhes do E-Mail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+</div>
+
+<div class="col-md-8">
+    <div>
+        <h4>Detalhe do Email</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                Cliente
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DoNome) @Html.Raw(" <") @Html.DisplayFor(model => model.DoEmail) @Html.Raw("> ")
+            </dd>
+
+            <dt>&nbsp;</dt>
+            <dd>&nbsp;</dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Enviado Para
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ParaNome) @Html.Raw(" <") @Html.DisplayFor(model => model.ParaEmail) @Html.Raw("> ")
+            </dd>
+
+            <dt>&nbsp;</dt>
+            <dd>&nbsp;</dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Assunto)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Assunto)
+            </dd>
+
+            <dt>&nbsp;</dt>
+            <dd>&nbsp;</dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Mensagem)
+            </dt>
+            <dd>&nbsp;</dd>
+
+            <dt>&nbsp;</dt>
+            <dd style="zoom:60%;">
+                @Html.Raw(Model.Mensagem)
+            </dd>
+
+            <dt>&nbsp;</dt>
+            <dd>&nbsp;</dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DataEnvio)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DataEnvio)
+            </dd>
+
+            @if (Model.Extra != "")
+            {
+                <dt style="font-size:16px;line-height:30px;">
+                    @Html.DisplayNameFor(model => model.Extra)
+                </dt>
+
+                <dd style="font-size:16px;line-height:30px;">
+                    @Html.DisplayFor(model => model.Extra)
+                </dd>
+            }
+
+            <dt>&nbsp;</dt>
+            <dd>&nbsp;</dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.HouveFalha)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.HouveFalha)
+            </dd>
+        </dl>
+        <hr />
+    </div>
+    <p style="padding-top:30px;">
+        @Html.ActionLink(" ", "Edit", new { id = Model.CodigoEmail }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-error", title = "Voltar" })
+    </p>
+</div>

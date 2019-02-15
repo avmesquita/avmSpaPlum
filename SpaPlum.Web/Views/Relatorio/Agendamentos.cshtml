@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Agendamentos";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Corpus Spa</h2>
+<h5>Agendamentos</h5>
+
+<br />
+<div class="ui-button" style="margin-bottom:10px">
+    @Html.ActionLink("Exportar para Excel (sem filtro)", "ExportarAgendamentos", "Relatorio")
+</div>
+
+<table id="dgAgendamentos" title="Agendamentos" style="width:auto;height:auto"
+       class="easyui-datagrid"
+       url="/Relatorio/Agendamentos"
+       data-options="singleselect:true,pagination:true">
+    <thead>
+        <tr>
+            <th field="Filial" width="200" sortable="true" align="left">Filial</th>
+            <th field="DataInicial" width="200" sortable="true" align="left">Data Inicial</th>
+            <th field="DataFinal" width="500" sortable="true" align="left">Data Final</th>
+            <th field="Valor" width="300" sortable="true" align="left">Valor</th>
+        </tr>
+    </thead>
+</table>
+
+<br /><br />
+
+<script type="text/javascript">
+    $(function () {
+        var dgAgendamentos = $('#dgAgendamentos').datagrid(
+            {
+                singleSelect: true,
+                loadMsg: "Carregando..."
+            });
+        dgAgendamentos.datagrid('enableFilter');
+    });
+</script>

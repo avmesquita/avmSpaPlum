@@ -1,0 +1,35 @@
+﻿@model SpaPlum.Web.Entity.Cliente
+
+@{
+    ViewBag.Title = "Detalhes do Cliente";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-md-8">
+    <div>
+        <div style="float:right;width:150px;display:none;">
+            @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+        </div>
+		<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Detalhes do Cliente</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Total de Pontos
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.PontosVIP)&nbsp;pontos
+            </dd>
+        </dl>
+    </div>
+    <p style="padding-top:30px;text-align:center;">
+        @*@Html.ActionLink(" ", "Edit", new { id = Model.CodigoCliente }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })&nbsp;&nbsp;*@@Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+    </p>
+</div>

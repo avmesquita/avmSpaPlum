@@ -1,0 +1,5 @@
+﻿user-Agent: *
+disallow: /Account/Login
+allow: /
+
+Sitemap: http://central.corpuspa.com.br/Sitemap/

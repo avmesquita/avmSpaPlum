@@ -1,0 +1,64 @@
+﻿@model SpaPlum.Web.Entity.Email
+
+@{
+    ViewBag.Title = "Enviar e-mail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-10">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 style="text-decoration:underline;">Enviar e-mail</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("Filial", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+				Colocar uma combo para selecionar a filial que está enviando o e-mail.
+                @*Html.EditorFor(model => model.DoEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DoEmail, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				Colocar uma combo para selecionar para onde está enviando a mensagem.
+				Oferecer filtro de cliente, fornecedor, profissional, usuario.
+				@*Html.EditorFor(model => model.ParaNome, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.ParaNome, "", new { @class = "text-danger" })*@
+			</div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Assunto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Assunto, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Assunto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mensagem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Mensagem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Mensagem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enviar" class="btn btn-default btn-primary btn-success" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-error", title = "Voltar" })
+            </div>
+        </div>
+    </div>
+    }
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

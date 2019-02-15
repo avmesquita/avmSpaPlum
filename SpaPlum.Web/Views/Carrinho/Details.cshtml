@@ -1,0 +1,51 @@
+﻿@model SpaPlum.Web.Entity.Carrinho
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Carrinho</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SessionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SessionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IPCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IPCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoAgendamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoAgendamento)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoCarrinho }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

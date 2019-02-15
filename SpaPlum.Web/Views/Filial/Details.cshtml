@@ -1,0 +1,52 @@
+﻿@model SpaPlum.Web.Entity.Filial
+
+@{
+    ViewBag.Title = "Detalhes da Filial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+</div>
+
+<div class="col-md-8">
+	<div>		
+		<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Detalhes da Filial</h4>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt style="font-size:16px;line-height:30px;">
+				@Html.DisplayNameFor(model => model.Nome)
+			</dt>
+
+			<dd style="font-size:16px;line-height:30px;">
+				@Html.DisplayFor(model => model.Nome)
+			</dd>
+
+			<dt style="font-size:16px;line-height:30px;">
+				@Html.DisplayNameFor(model => model.Ativo)
+			</dt>
+
+			<dd style="font-size:16px;line-height:30px;">
+				@Html.DisplayFor(model => model.Ativo)
+			</dd>
+
+			<dt style="font-size:16px;line-height:30px;">
+				@Html.DisplayNameFor(model => model.EmailPrincipalFilial)
+			</dt>
+
+			<dd style="font-size:16px;line-height:30px;">
+				@Html.DisplayFor(model => model.EmailPrincipalFilial)
+			</dd>
+
+			<dt style="font-size:16px;line-height:30px;">
+				@Html.DisplayNameFor(model => model.EmailSecundarioFilial)
+			</dt>
+
+			<dd style="font-size:16px;line-height:30px;">
+				@Html.DisplayFor(model => model.EmailSecundarioFilial)
+			</dd>
+		</dl>
+	</div>
+    <p style="padding-top:30px;text-align:center;">
+        @Html.ActionLink(" ", "Edit", new { id = Model.CodigoFilial }, new { @class = "btn btn-success btn-large glyphicon glyphicon-pencil", title = "Editar" })&nbsp;&nbsp;@Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+    </p>
+</div>

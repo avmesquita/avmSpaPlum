@@ -1,0 +1,100 @@
+﻿@model SpaPlum.Web.Entity.Servico
+
+@{
+    ViewBag.Title = "Detalhes do Serviço";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+</div>
+
+<div class="col-md-8">
+    <div>
+		<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Detalhes do Serviço</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                Título
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Tempo Aprox. (min.)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.TempoAproximadoDoServico)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Preço
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Valor)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Part.Empresa
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorComissaoEmpresa)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Part.Prestador
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorComissaoTerapeuta)
+            </dd>
+
+            <dt style="height:40px;margin-top:30px;">
+                Está em Promoção?
+            </dt>
+
+            <dd style="height:40px;margin-top:30px;">
+                @Html.DisplayFor(model => model.EmPromocao)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Preço<br /> Promocional
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorPromocao)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Part.Empresa
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorPromocaoComissaoEmpresa)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Part.Prestador
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorPromocaoComissaoTerapeuta)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Ativo
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
+        </dl>
+    </div>
+    <p style="padding-top:30px;text-align:center;">
+        @Html.ActionLink(" ", "Edit", new { id = Model.CodigoServico }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+    </p>
+</div>

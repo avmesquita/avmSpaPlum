@@ -1,0 +1,68 @@
+﻿@model SpaPlum.Web.Models.AgendamentoModel
+
+@{
+    ViewBag.Title = "Agendamento em 5 passos";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+
+
+    <div class="form-horizontal">
+        <h4>Agendamento em 5 Passos</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.CodigoAgendamento)
+        @Html.HiddenFor(model => model.NomeCliente)
+        @Html.HiddenFor(model => model.EmailDoCliente)
+        @Html.HiddenFor(model => model.TelefoneDoCliente)
+        @Html.HiddenFor(model => model.ClubeVIP)
+        @Html.HiddenFor(model => model.DataInicial)
+        @Html.HiddenFor(model => model.DataFinal)
+        @Html.HiddenFor(model => model.Valor)
+        @Html.HiddenFor(model => model.Observacao)
+        @Html.HiddenFor(model => model.CodigoStatusAgendamento)
+        @Html.HiddenFor(model => model.CodigoTipoPagamento)
+        @Html.HiddenFor(model => model.IPdoCliente)
+        @Html.HiddenFor(model => model.SessionID)
+        @Html.HiddenFor(model => model.ValorTaxaAdicional)
+        @Html.HiddenFor(model => model.CodigoFilial)
+        @Html.HiddenFor(model => model.ItensDoAgendamento)
+
+        <div class="col-md-10">
+            <fieldset>
+                <legend>Identificação e Observação</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NomeCliente, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailDoCliente, "E-Mail", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmailDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmailDoCliente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Observacao, 5, 40, new { htmlAttributes = new { @class = "form-control", style="width:300px;" } })
+                        @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Rever os Passos e Confirmar" class="btn btn-default btn-success" id="btnWizardRevisao" name="btnWizardRevisao" />
+        </div>
+
+    </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/wizardpasso5")
+}

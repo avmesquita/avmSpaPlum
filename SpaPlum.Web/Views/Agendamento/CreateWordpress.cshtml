@@ -1,0 +1,198 @@
+﻿@{
+    Layout = null;
+}
+@model SpaPlum.Web.Entity.Agendamento
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/moment")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/wordpress")
+<script src="https://use.fontawesome.com/c23528279d.js"></script>
+<style>
+    body {
+        background-color: #E0DACE;
+    }
+    .datepicker {   
+      width:250px;  
+      position: relative;  
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="zoom:90%;">
+        <h4>Novo Agendamento</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.ClubeVIP, " ")
+        @Html.HiddenFor(model => model.DataFinal)
+        @Html.Hidden("CodigoTipoDeMassagem", "0")
+
+        @if (HttpContext.Current.User.Identity.Name == "")
+        {
+            @Html.Hidden("CodigoStatusAgendamento", "1")
+        }
+
+        <div class="col-md-6">
+            <fieldset>
+                <legend>Quando e onde?</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataInicial, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DataInicial, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DataInicial, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CodigoFilial, "Filial", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CodigoFilial", new SelectList(ViewBag.ListaFilial, "Value", "Text"), "Selecione a Filial...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })
+                    </div>
+                </div>
+
+            </fieldset>
+            <br /><br />
+            <fieldset>
+                <legend>Terapia e Terapeuta</legend>
+                <div class="form-group">
+                    @Html.Label("Serviço", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CodigoServico", Enumerable.Empty<SelectListItem>(), "Selecione a Terapia...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;", @disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.Label("Terapeuta", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CodigoTerapeuta", Enumerable.Empty<SelectListItem>(), "Selecione a Terapeuta...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;", @disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.Label("Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.RadioButton("TipoDeMassagem", "Massagem Padrão", new { Id = 0, Value = 0, Text = "Massagem Padrão" })&nbsp;Massagem Padrão<br />
+                        @Html.RadioButton("TipoDeMassagem", "Massagem 4 Mãos", new { Id = 1, Value = 1, Text = "Massagem 4 Mãos" })&nbsp;Massagem 4 Mãos<br />
+                        @Html.RadioButton("TipoDeMassagem", "Massagem Para Casais", new { Id = 2, Value = 2, Text = "Massagem Para Casais" })&nbsp;Massagem Para Casais<br />
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    <span class="control-label col-md-2">Quantos Períodos</span>
+                    <div class="col-md-10">
+                        @Html.Editor("QuantidadePeriodos", "1", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <p><input type="button" id="btnAdicionar" name="btnAdicionar" value="Adicionar" class="btn btn-primary btn-info" /></p>
+                <div class="clearfix"></div>
+            </fieldset>
+        </div>
+
+        <div class="col-md-6">
+            <fieldset>
+                <legend>Terapias Selecionadas</legend>
+                <div id="resultado" class="table-responsive">
+                    Nenhuma Terapia adicionado na sacola<br /><br />
+                </div>
+                <p><input type="button" id="btnLimparSacola" name="btnLimparSacola" value="Limpar Sacola" class="btn btn-primary btn-danger" /></p>
+                <br />
+
+            </fieldset>
+            <div class="clearfix"></div>
+            <fieldset>
+                <legend>Preço e Pagamento</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Valor, "0,00", new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", id = "Valor", name = "Valor" } })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CodigoTipoPagamento, "Forma Pagto", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*Html.DropDownList("CodigoTipoPagamento", new SelectList(ViewBag.ListaTipoPagamento, "Value", "Text"), "Selecione a forma de pagamento...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })*@
+                        @Html.DropDownList("CodigoTipoPagamento", Enumerable.Empty<SelectListItem>(), "Selecione a Forma de Pagto...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.CodigoTipoPagamento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @if (HttpContext.Current.User.Identity.Name != "")
+                {
+                    <div class="clearfix"></div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ValorTaxaAdicional, "Adicional", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ValorTaxaAdicional, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ValorTaxaAdicional, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                }
+            </fieldset>
+
+            <br /><br />
+            <fieldset>
+                <legend>Identificação e Observação</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NomeCliente, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailDoCliente, "E-Mail", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmailDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmailDoCliente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @*
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TelefoneDoCliente, "Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TelefoneDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TelefoneDoCliente, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                *@
+                <div class="clearfix"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Observacao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+
+            @if (HttpContext.Current.User.Identity.Name != "")
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CodigoStatusAgendamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CodigoStatusAgendamento", new SelectList(ViewBag.ListaStatusAgendamento, "Value", "Text"), "Selecione o Status...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })
+                        @Html.ValidationMessageFor(model => model.CodigoStatusAgendamento, "Você deve selecionar um dia da semana para prosseguir.", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @*<input type="submit" value="Agendar" onclick="javascript: return validarAgendamento();" class="btn btn-default btn-primary" />*@
+                    <input type="button" id="btnGravarAgendamento" name="btnGravarAgendamento" value="Agendar" class="btn btn-default btn-primary btn-success" style="width:300px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

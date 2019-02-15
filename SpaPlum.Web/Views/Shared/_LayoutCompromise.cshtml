@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html public lang="pt-br">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <title>Corpus SPA - @ViewBag.Title</title>
+    <meta name="description" content="Central de Agendamento Corpus SPA" />
+    <meta name="keywords" content="massagem, niter�i, rio de janeiro, rj, nikiti, spa, agendamento, terapia, terapeuta, massoterapia, massoterapeuta, corpuspa" />
+    <meta name="robots" content="index,nofollow" />
+    <meta http-equiv="content-language" content="pt-br" />
+    @Styles.Render("~/Content/cssCompromise")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://use.fontawesome.com/c23528279d.js"></script>
+    <script type='application/ld+json'>
+        {
+        "@@context": "http://www.schema.org",
+        "@@type": "LocalBusiness",
+        "name": "Corpus SPA",
+        "url": "http://central.corpuspa.com.br",
+        "logo": "http://central.corpuspa.com.br/Content/images/corpuspa.png",
+        "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Rua Doutor Borman, 43, Salas 1103/1104",
+        "addressLocality": "Niteroi",
+        "addressRegion": "RJ",
+        "postalCode": "24020-320",
+        "addressCountry": "Brasil"
+        },
+        "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Av. N.Sra.Copacabana, 647, Salas 1106/1107",
+        "addressLocality": "Copacabana",
+        "addressRegion": "RJ",
+        "postalCode": "20020-001",
+        "addressCountry": "Brasil"
+        },
+        "contactPoint": {
+        "@@type": "ContactPoint",
+        "telephone": "(21) 3620-4308",
+        "telephone": "(21) 9-9064-4834"
+        "email": "contato@corpuspa.com.br",
+        },
+        "sameAs": ["http://www.corpuspa.com.br",
+        "http://www.facebook.com/corpuspa/",
+        "https://www.instagram.com/corpuspa/",
+        "https://www.pinterest.com/corpuspa",
+        "https://plus.google.com/u/0/116462981235821529690"],
+        "hasMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.4724075711333!2d-43.12323018494474!3d-22.89594014324039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9983c344ad663f%3A0x8c664c0828e1a43d!2sR.+Dr.+Bormann%2C+43+-+Centro%2C+Niter%C3%B3i+-+RJ%2C+24020-320!5e0!3m2!1spt-BR!2sbr!4v1481266675043",
+        "hasMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.4408290703745!2d-43.18843458503306!3d-22.970811684979342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bd5452ffc0df5%3A0xa612562f6f4e84a6!2sAv.+Nossa+Sra.+de+Copacabana%2C+647+-+Copacabana%2C+Rio+de+Janeiro+-+RJ%2C+22020-001!5e0!3m2!1spt-BR!2sbr!4v1485273876867",
+        "openingHours": "Mo, Tu, We, Th, Fr 09:00-21:00 Sa 09:00-18:00"
+        }
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-00000000-0', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+    <div id="header">
+        <div id="logo">
+            <h1>
+                <a href="#">Compromise </a>
+            </h1>
+            <p>
+                design by <a href="http://www.freecsstemplates.org/">Free CSS Templates and Keith Adler</a>
+            </p>
+        </div>
+    </div>
+    <!-- end #header -->
+    <div id="menu">
+        <ul>
+            <li class="first">
+                <%= Html.ActionLink("Home", "Index", "Home") %>
+            </li>
+            <li>
+                <%= Html.ActionLink("About", "About", "Home") %>
+            </li>
+        </ul>
+    </div>
+    <!-- end #menu -->
+    <div id="wrapper">
+        <div class="btm">
+            <div id="page">
+                <div id="content">
+                    <div class="post">
+                        <h1 class="title">
+                            <a href="#">Welcome to Compromise </a>
+                        </h1>
+                        <div class="entry">
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                        </div>
+                        <p class="meta">
+                            Posted by <a href="#">Someone</a> on March 10, 2008 &nbsp;&bull;&nbsp; <a href="#"
+                                                                                                      class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">
+                                Full article
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!-- end #content -->
+                <div id="sidebar">
+                    <ul>
+                        <li>
+                            <h2>
+                                Aliquam tempus
+                            </h2>
+                            <p>
+                                Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna
+                                ornare consectetuer hendrerit.
+                            </p>
+                        </li>
+                        <li>
+                            <h2>
+                                Categories
+                            </h2>
+                            <ul>
+                                <li><a href="#">Uncategorized</a> (3)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">Lorem Ipsum</a> (42)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li>
+                                    <a href="#">Urna Congue Rutrum</a> (28)<span>Lorem Ipsum Dolor Sit Amit</span>
+                                </li>
+                                <li>
+                                    <a href="#">Vivamus Fermentum</a> (13)<span>Lorem Ipsum Dolor Sit Amit</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2>
+                                Blogroll
+                            </h2>
+                            <ul>
+                                <li>
+                                    <a href="#">Phasellus Pellentesque</a><span>Lorem Ipsum Dolor Sit Amit</span>
+                                </li>
+                                <li>
+                                    <a href="#">Consectetuer Adipiscing</a><span>Lorem Ipsum Dolor Sit Amit</span>
+                                </li>
+                                <li><a href="#">Urna Congue Rutrum</a><span>Lorem Ipsum Dolor Sit Amit</span> </li>
+                                <li>
+                                    <a href="#">Phasellus Pellentesque</a><span>Lorem Ipsum Dolor Sit Amit</span>
+
+
+
+                                </li>
+                                <li><a href="#">Urna Congue Rutrum</a><span>Lorem Ipsum Dolor Sit Amit</span> </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2>
+                                Archives
+                            </h2>
+                            <ul>
+                                <li><a href="#">December 2007</a>&nbsp;(29)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">November 2007</a>&nbsp;(30)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                                <li><a href="#">October 2007</a>&nbsp;(31)<span>Lorem Ipsum Dolor Sit Amit</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end #sidebar -->
+                <div style="clear: both;">
+                    &nbsp;
+                </div>
+            </div>
+            <!-- end #page -->
+        </div>
+    </div>
+    <div id="footer">
+        <p>
+            Copyright (c) 2009 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">
+                Free CSS Templates
+            </a> and Keith Adler.
+        </p>
+    </div>
+    <!-- end #footer -->
+</body>
+</html>

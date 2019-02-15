@@ -1,0 +1,61 @@
+﻿
+@using DayPilot.Web.Mvc.Enums.Calendar
+@using DayPilot.Web.Mvc.Events.Calendar
+
+@section TitleContent {
+
+	AJAX Drag&amp;Drop Monthly Event Calendar
+
+}
+
+
+
+<script type="text/javascript">
+
+    var dp;
+    
+	function createEvent(start, end) {
+	    var name = prompt("New Event Name:", "New Event");
+	    if (!name) { return; }
+	    dp.timeRangeSelectedCallBack(start, end, { name: name });
+	    dp.clearSelection();
+	}
+
+</script>
+
+    <div class="note">
+    <b>Note:</b> The Calendar can be initialized using a jQuery plugin.
+    </div>
+
+<div id="dpm"></div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    dp = $("#dpm").daypilotMonth({
+      backendUrl: '@Url.Content("~/Month/Backend")',
+      timeRangeSelectedHandling: "JavaScript",
+      onTimeRangeSelected: function(start, end) { createEvent(start, end); },
+      eventMoveHandling: "CallBack",
+      eventResizeHandling: "CallBack",
+    });
+});
+</script>
+
+<h2>Source</h2>
+
+<pre>&lt;div id="dpc"&gt;&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+  $(document).ready(function() {
+    dp = $("#dpm").daypilotMonth({
+      backendUrl: '@@Url.Content("~/Month/Backend")',
+      timeRangeSelectedHandling: "JavaScript",
+      onTimeRangeSelected: function(start, end) { createEvent(start, end); },
+      eventMoveHandling: "CallBack",
+      eventResizeHandling: "CallBack",
+    });
+  });
+&lt;/script&gt;</pre>
+
+
+

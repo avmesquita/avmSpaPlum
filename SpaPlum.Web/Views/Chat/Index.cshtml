@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Chat";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Mural de Mensagens</h4>
+
+<div class="col-md-10" style="padding-top:10px;">
+    <h4 id="message" style="padding-left:10px;"></h4>
+    <div id="chatarea" style="border-top: 1px solid #DDD;padding-left:10px;"">
+    </div>
+    <div style="position:fixed;width: calc(90% - 21px);background-color:#2c3e68;color:#fff;height:20px;bottom:90px;max-width:400px;border-color:gray;border-width:0.5px;border-radius:3px;" id="avmMensagem">
+        <form id="newmessage" action="" method="post">
+            <input type="hidden" id="newmessage_username" value="@HttpContext.Current.User.Identity.Name" />
+			<span style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">&nbsp;Mensagem</span><br /><input type="text" id="newmessage_messagebody" class="form-control" style="max-width:400px;color:black;" autocomplete="off" />
+            <input type="button" value="Enviar" class="btn btn-primary btn-info" id="newmessage_sendbutton" onclick="sendNewMessage()" style="" />
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#message").html("Carregando mensagens do dia...");
+        var refreshId = setInterval(
+            "updateChatArea()",
+            5000);
+    });
+
+	function updateChatArea() {
+		$("#message").html("Atualizando...");
+        $.getJSON(
+            "/Chat/GetMessages/",
+            null,
+            function (data) {
+                $("#message").html += "Obtendo...";
+                $("#chatarea").html("");
+                var x;
+                if (data.length > 0) {
+                    for (x in data) {
+                        $("#chatarea").html(
+                        $("#chatarea").html() +
+                        "<p><b>" +
+                        data[x].Username + "</b> <i>(" +
+                        data[x].PostDateTime + ")</i> - " +
+                        data[x].MessageBody + "</p>");
+                    }
+                }
+                else {
+					$("#chatarea").html("<p style='font-family:monospace;'>Sem messages</p>");
+                }
+            });
+        $("#message").html("Mensagens do Dia");
+        $("input#newmessage_messagebody").focus;
+    }
+</script>
+
+
+<script type="text/javascript">
+    function sendNewMessage() {
+        $.post(
+            "/Chat/AddMessage",
+            {
+                Username: $("#newmessage_username").val(),
+                MessageBody: $("#newmessage_messagebody").val()
+            });
+        $("#newmessage_messagebody").val("");
+        updateChatArea();        
+    }
+</script>
+

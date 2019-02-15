@@ -1,0 +1,30 @@
+﻿
+@using DayPilot.Web.Mvc.Events.Month
+
+@section TitleContent {
+	Traditional CSS Theme (Monthly Event Calendar)
+}
+
+<script type="text/javascript">
+
+	function createEvent(start, end) {
+	    var name = prompt("New Event Name:", "New Event");
+	    if (!name) { return; }
+	    dp.timeRangeSelectedCallBack(start, end, { name: name });
+	    dp.clearSelection();
+	}
+
+</script>
+
+@(Html.DayPilotMonth("dp", new DayPilotMonthConfig { 
+    BackendUrl = Url.Content("~/Month/Backend"),
+    Theme = "month_traditional",
+                
+    TimeRangeSelectedHandling = TimeRangeSelectedHandlingType.JavaScript,
+    TimeRangeSelectedJavaScript = "createEvent(start, end)",
+    EventMoveHandling = EventMoveHandlingType.CallBack,
+    EventResizeHandling = EventResizeHandlingType.CallBack
+}))
+
+
+

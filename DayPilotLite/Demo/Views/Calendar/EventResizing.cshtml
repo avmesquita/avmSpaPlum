@@ -1,0 +1,22 @@
+﻿
+@using DayPilot.Web.Mvc.Events.Calendar
+
+@section TitleContent {
+
+	AJAX Drag&amp;Drop Calendar Event Resizing
+
+}
+
+
+    <p>
+        @(Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig { 
+                BackendUrl = Url.Content("~/Calendar/Backend"),
+                ViewType = DayPilot.Web.Mvc.Enums.Calendar.ViewType.Week,
+                
+                EventResizeHandling = EventResizeHandlingType.CallBack,
+
+        }))
+    </p>
+
+
+

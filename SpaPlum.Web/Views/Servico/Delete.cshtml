@@ -1,0 +1,106 @@
+﻿@model SpaPlum.Web.Entity.Servico
+
+@{
+    ViewBag.Title = "Exclusão de Serviço";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-md-8">
+    <h3 style="color:red;text-align:center;"><b>Tem certeza que deseja excluir?</b></h3>
+    <br />
+    <div>
+		<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Detalhes do Serviço</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;height:40px;">
+                Tempo Aprox. (min.)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;height:40px;">
+                @Html.DisplayFor(model => model.TempoAproximadoDoServico)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Valor)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Valor)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ValorComissaoEmpresa)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorComissaoEmpresa)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ValorComissaoTerapeuta)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorComissaoTerapeuta)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmPromocao)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmPromocao)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ValorPromocao)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorPromocao)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ValorPromocaoComissaoEmpresa)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorPromocaoComissaoEmpresa)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ValorPromocaoComissaoTerapeuta)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorPromocaoComissaoTerapeuta)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Ativo)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style="padding-top:30px;text-align:center;">
+                <input type="submit" value="Excluir" class="btn btn-default btn-primary btn-danger" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+            </div>
+        }
+    </div>
+</div>
+

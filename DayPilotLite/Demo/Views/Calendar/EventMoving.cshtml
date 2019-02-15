@@ -1,0 +1,22 @@
+﻿
+@using DayPilot.Web.Mvc.Enums.Calendar
+@using DayPilot.Web.Mvc.Events.Calendar
+
+@section TitleContent {
+
+	AJAX Drag&amp;Drop Calendar Event Moving
+
+}
+
+
+    <p>
+        @(Html.DayPilotCalendar("dpc", new DayPilotCalendarConfig { 
+                BackendUrl = Url.Content("~/Calendar/Backend"),
+                ViewType = DayPilot.Web.Mvc.Enums.Calendar.ViewType.Week,
+                EventMoveHandling = EventMoveHandlingType.CallBack,
+ 
+        }))
+    </p>
+
+
+

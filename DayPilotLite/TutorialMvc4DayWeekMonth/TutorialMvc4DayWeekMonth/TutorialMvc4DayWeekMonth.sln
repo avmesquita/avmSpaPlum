@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TutorialCS", "TutorialCS\", "{4E18CDD7-33F5-44E6-894B-6FB555C14265}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/TutorialCS"
+		Debug.AspNetCompiler.PhysicalPath = "TutorialCS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\TutorialCS\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/TutorialCS"
+		Release.AspNetCompiler.PhysicalPath = "TutorialCS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\TutorialCS\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "63724"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TutorialVB", "TutorialVB\", "{FEAEBE3C-C74F-44B7-8D93-F80C14A3F861}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/TutorialVB"
+		Debug.AspNetCompiler.PhysicalPath = "TutorialVB\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\TutorialVB\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/TutorialVB"
+		Release.AspNetCompiler.PhysicalPath = "TutorialVB\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\TutorialVB\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "58619"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E18CDD7-33F5-44E6-894B-6FB555C14265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E18CDD7-33F5-44E6-894B-6FB555C14265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEAEBE3C-C74F-44B7-8D93-F80C14A3F861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEAEBE3C-C74F-44B7-8D93-F80C14A3F861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

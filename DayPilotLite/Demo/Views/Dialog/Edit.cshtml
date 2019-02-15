@@ -1,0 +1,43 @@
+﻿@{ Layout = "~/Views/Shared/_Blank.cshtml"; }
+<!DOCTYPE html>
+<html>
+<body class="padded">
+    <form id="f" method="post" action="@Url.Action("Edit")">
+    <h2>Edit Event</h2>
+
+    <div style="margin-top:20px">
+        <div>Event text</div>
+        @Html.TextBox("Text")@Html.Hidden("Id")
+    </div>
+    
+    <div style="margin-top:20px">
+        <input type="submit" value="Save" />
+        <a href="javascript:close()">Cancel</a>
+    </div>
+    
+    </form>
+    
+    <script type="text/javascript">
+        function close(result) {
+           if (parent && parent.DayPilot && parent.DayPilot.ModalStatic) {
+                parent.DayPilot.ModalStatic.close(result);
+           }
+        }
+        
+        $("#f").submit(function() {
+                var f = $("#f");
+                $.post(f.action, f.serialize(), function(result) {
+                    close(eval(result));
+                });
+                return false;
+            });
+            
+        $(document).ready(function() {
+            $("#Text").focus();
+        });
+    
+    </script>
+    
+</body>
+</html>
+

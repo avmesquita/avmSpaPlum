@@ -1,0 +1,107 @@
+﻿@model SpaPlum.Web.Entity.HorarioTerapeuta
+@{
+    ViewBag.Title = "Alocação de Disponibilidade de Atendimento";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2 style="text-decoration:underline;">Alocação de Disponibilidade de Atendimento</h2>
+<br /><br />
+<div class="col-md-8">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Selecione a disponibilidade de horário do profissional</h4>
+		<hr />
+		<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Profissional: @ViewBag.NomeTerapeuta</h4><br />
+
+		@Html.HiddenFor(m => m.CodigoTerapeuta)
+
+
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+		<div class="form-group">
+
+			<div class="col-md-12" style="width:100%;zoom:70%;">
+				<table>
+					<thead>
+						<tr>
+							<th style="text-align:center;">Domingo<br />&nbsp;</th>
+							<th style="text-align:center;">Segunda<br />&nbsp;</th>
+							<th style="text-align:center;">Terça-feira<br />&nbsp;</th>
+							<th style="text-align:center;">Quarta-feira<br />&nbsp;</th>
+							<th style="text-align:center;">Quinta-feira<br />&nbsp;</th>
+							<th style="text-align:center;">Sexta-feira<br />&nbsp;</th>
+							<th style="text-align:center;">Sábado<br />&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="text-align:center;">
+								@Html.CheckBoxFor(m => m.chkDomingo, new { htmlAttributes = new { style = "width:100px;" }, @class = "form-control" })<br />
+								Entrada<br /><br /><input type="time" id="txtDomingoHoraEntrada" name="txtDomingoHoraEntrada" placeholder="09:00" step="60" class="form-control" style="width:130px;" /><br />
+								Saída<br /><br /><input type="time" id="txtDomingoHoraSaida" name="txtDomingoHoraSaida" placeholder="18:00" class="form-control" style="width:130px;" />
+							</td>
+							<td style="text-align:center;">
+								@Html.CheckBoxFor(m => m.chkSegunda, new { htmlAttributes = new { style = "width:100px;" }, @class = "form-control" })<br />
+								Entrada<br /><br /><input type="time" id="txtSegundaHoraEntrada" name="txtSegundaHoraEntrada" placeholder="09:00" class="form-control" style="width:130px;" /><br />
+								Saída<br /><br /><input type="time" id="txtSegundaHoraSaida" name="txtSegundaHoraSaida" placeholder="18:00" class="form-control" style="width:130px;" />
+							</td>
+							<td style="text-align:center;">
+								@Html.CheckBoxFor(m => m.chkTerca, new { htmlAttributes = new { style = "width:100px;" }, @class = "form-control" })<br />
+								Entrada<br /><br /><input type="time" id="txtTercaHoraEntrada" name="txtTercaHoraEntrada" placeholder="09:00" class="form-control" style="width:130px;" /><br />
+								Saída<br /><br /><input type="time" id="txtTercaHoraSaida" name="txtTercaHoraSaida" placeholder="18:00" class="form-control" style="width:130px;" />
+							</td>
+							<td style="text-align:center;">
+								@Html.CheckBoxFor(m => m.chkQuarta, new { htmlAttributes = new { style = "width:100px;" }, @class = "form-control" })<br />
+								Entrada<br /><br /><input type="time" id="txtQuartaHoraEntrada" name="txtQuartaHoraEntrada" placeholder="09:00" class="form-control" style="width:130px;" /><br />
+								Saída<br /><br /><input type="time" id="txtQuartaHoraSaida" name="txtQuartaHoraSaida" placeholder="18:00" class="form-control" style="width:130px;" />
+							</td>
+							<td style="text-align:center;">
+								@Html.CheckBoxFor(m => m.chkQuinta, new { htmlAttributes = new { style = "width:100px;" }, @class = "form-control" })<br />
+								Entrada<br /><br /><input type="time" id="txtQuintaHoraEntrada" name="txtQuintaHoraEntrada" placeholder="09:00" class="form-control" style="width:130px;" /><br />
+								Saída<br /><br /><input type="time" id="txtQuintaHoraSaida" name="txtQuintaHoraSaida" placeholder="18:00" class="form-control" style="width:130px;" />
+							</td>
+							<td style="text-align:center;">
+								@Html.CheckBoxFor(m => m.chkSexta, new { htmlAttributes = new { style = "width:100px;" }, @class = "form-control" })<br />
+								Entrada<br /><br /><input type="time" id="txtSextaHoraEntrada" name="txtSextaHoraEntrada" placeholder="09:00" class="form-control" style="width:130px;" /><br />
+								Saída<br /><br /><input type="time" id="txtSextaHoraSaida" name="txtSextaHoraSaida" placeholder="18:00" class="form-control" style="width:130px;" />
+							</td>
+							<td style="text-align:center;">
+								@Html.CheckBoxFor(m => m.chkSabado, new { htmlAttributes = new { style = "width:100px;" }, @class = "form-control" })<br />
+								Entrada<br /><br /><input type="time" id="txtSabadoHoraEntrada" name="txtSabadoHoraEntrada" placeholder="09:00" class="form-control" style="width:130px;text-align:center;" /><br />
+								Saída<br /><br /><input type="time" id="txtSabadoHoraSaida" name="txtSabadoHoraSaida" placeholder="18:00" class="form-control" style="width:130px;text-align:center;" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-4 col-md-12">
+				<br />
+				<input type="submit" value="Gravar" class="btn btn-default btn-primary btn-success" />&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+			</div>
+		</div>
+	</div>
+    }
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/bootstrap")
+
+        <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        $("#CodigoDiaDaSemana").focus();
+
+                        $('input[data-title=Second]').val('00');
+
+                        //$('#CodigoDiaDaSemana').change(function () {
+                        //
+                        //});
+
+                    });
+        </script>
+    }
+

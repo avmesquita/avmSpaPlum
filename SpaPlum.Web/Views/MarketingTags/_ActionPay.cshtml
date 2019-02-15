@@ -1,0 +1,19 @@
+﻿@model SpaPlum.Web.Models.ActionPayTagModel
+
+<script type='text/javascript'>
+    var cookieorigem = getCookie('Origem');
+    var cookieactionpay = getCookie('actionpay');
+    function getCookie(cname) {
+        var name = cname + '=';
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return '';
+    }
+    if (cookieorigem == 'actionpay') {
+        document.write('<img src=//n.actionpay.ru/ok/6653.png?actionpay=' + cookieactionpay + '&apid=' +@Model.idVenda +'&price=' +@Model.Valor +' height=1 width=1 >');
+    }
+</script>

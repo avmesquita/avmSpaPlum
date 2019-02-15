@@ -1,0 +1,76 @@
+﻿@model SpaPlum.Web.Entity.FilialConfiguracao
+
+@{
+    ViewBag.Title = "Exclusão de configuração de filial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:30px;" })
+</div>
+
+<div class="col-md-8">
+    <h3 style="color:red;text-align:center;"><b>Tem certeza que deseja excluir?</b></h3>
+    <div style="padding-top:30px;">
+        <h4 style="text-decoration:underline;">Detalhes da Configuração da Filial</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Filial.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Filial.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpHost)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpHost)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpPort)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpPort)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpSSL)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpSSL)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpAccount)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpAccount)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpPassword)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpPassword)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-top:30px;text-align:center;">
+            <input type="submit" value="Excluir" class="btn btn-default btn-primary btn-danger" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+        </div>
+}
+    </div>
+</div>

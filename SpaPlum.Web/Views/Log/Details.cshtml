@@ -1,0 +1,59 @@
+﻿@model SpaPlum.Web.Entity.Log
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Log</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DataRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataRegistro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoFilial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoFilial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Texto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Texto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoLog }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

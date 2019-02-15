@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.PontoTerapeuta>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+	ViewBag.Title = "Ponto do Dia";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/datatables")
+	@Styles.Render("~/Content/datatables")
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#tabela-promocoes').DataTable({
+				"language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+			});
+
+		});
+	</script>
+}
+<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Gestão do Ponto do Dia</h4>
+<br />
+<div style="float:right;padding-bottom:10px;padding-right:15px;">
+	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Registrar Ponto" })
+</div>
+<div class="col-md-12">
+	<table id="tabela-ponto" class="table">
+		<tr>
+			<th></th>
+			<th>
+				@Html.DisplayNameFor(model => model.Terapeuta.Nome) [Filial]
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Data)
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.ActionLink(" ", "Delete", new { id = item.CodigoPonto }, new { @class = "btn btn-large btn-danger glyphicon glyphicon-trash", title = "Excluir" })
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Terapeuta.Nome)  [@Html.DisplayFor(modelItem => item.Terapeuta.Filial.Nome)]
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Data)
+				</td>
+			</tr>
+		}
+
+	</table>
+</div>

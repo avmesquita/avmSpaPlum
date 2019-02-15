@@ -1,0 +1,32 @@
+﻿@model SpaPlum.Web.Entity.StatusAgendamento
+
+@{
+    ViewBag.Title = "Detalhes do Status do Agendamento";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Corpus SPA</h2>
+
+<div style="float:right;width:150px;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:30px;" })
+</div>
+
+<div>
+    <h4>Detalhes do Status de Agendamento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt cstyle="font-size:16px;line-height:30px;">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd style="font-size:16px;line-height:30px;">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" ", "Edit", new { id = Model.CodigoStatusAgendamento}, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })
+
+    <br /><br /><br /><br />
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar" })
+</p>

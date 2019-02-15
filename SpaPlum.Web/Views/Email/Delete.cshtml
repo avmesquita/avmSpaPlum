@@ -1,0 +1,107 @@
+﻿@model SpaPlum.Web.Entity.Email
+
+@{
+    ViewBag.Title = "Exclusão de E-mail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:30px;" })
+</div>
+
+<div class="col-md-8">
+    <h3 style="color:red;text-align:center;"><b>Tem certeza que deseja excluir?</b></h3>
+    <div style="padding-top:30px;">
+        <h4 style="text-decoration:underline;">Email</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DoNome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DoNome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DoEmail)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DoEmail)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ParaNome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ParaNome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ParaEmail)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ParaEmail)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Assunto)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Assunto)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Mensagem)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Mensagem)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DataEnvio)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DataEnvio)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Extra)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Extra)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.FoiLido)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.FoiLido)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.HouveFalha)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.HouveFalha)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Excluir" class="btn btn-default btn-primary btn-danger" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-error", title = "Voltar" })
+            </div>
+        }
+    </div>
+</div>

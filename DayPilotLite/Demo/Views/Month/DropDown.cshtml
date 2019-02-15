@@ -1,0 +1,29 @@
+﻿
+@using DayPilot.Web.Mvc.Enums
+@using DayPilot.Web.Mvc.Events.Month
+
+@section TitleContent { Simple Drop-Down Navigation (Monthly Calendar) }
+
+<div class="tip">
+<select id="dropdown">
+@{ for (var d = DateTime.Today; d < DateTime.Today.AddMonths(15); d = d.AddMonths(1)) {
+    <option value="@d.ToString("s")">@d.ToString("MMMM yyyy")</option>
+}}
+</select>
+</div>
+
+<div>
+@(Html.DayPilotMonth("dpm", new DayPilotMonthConfig() {
+    BackendUrl = Url.Content("~/Month/Backend"),
+    EventMoveHandling = EventMoveHandlingType.CallBack,
+    EventResizeHandling = EventResizeHandlingType.CallBack,
+    TimeRangeSelectedHandling = TimeRangeSelectedHandlingType.CallBack                
+}))
+</div>
+
+<script type="text/javascript">
+$("#dropdown").change(function() {
+    var selected = $(this).val();
+    dpm.commandCallBack("navigate", {start:selected});
+});
+</script>

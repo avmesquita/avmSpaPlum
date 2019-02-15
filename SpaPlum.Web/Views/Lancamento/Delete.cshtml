@@ -1,0 +1,105 @@
+﻿@model SpaPlum.Web.Entity.Lancamento
+
+@{
+	ViewBag.Title = "Exclusão de Lançamento";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Corpus SPA</h2>
+
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:30px;" })
+</div>
+
+<h3 style="color:red;text-align:center;"><b>Tem certeza que deseja excluir?</b></h3>
+<div>
+    <h4 style="text-decoration:underline;">Lancamento</h4>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.CodigoTipoOperacao)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@{
+				var operacoes = new SpaPlum.Web.Helpers.ListaTipoOperacao().TipoOperacaoLista;
+				var operacao = operacoes.Where(x => x.Value == Model.CodigoTipoOperacao.ToString()).FirstOrDefault().Text;
+			}
+			@Html.Display(operacao)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.TipoPagamento.Descricao)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.TipoPagamento.Descricao)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.Titulo)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.Titulo)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.Descricao)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.Descricao)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.DataVencimento)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.DataVencimento)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.DataPagamento)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.DataPagamento)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.DataLancamento)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.DataLancamento)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.Valor)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.Valor)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.ValorMulta)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.ValorMulta)
+		</dd>
+
+
+	</dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-top:30px;text-align:center;">
+            <input type="submit" value="Excluir" class="btn btn-default btn-primary btn-danger" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+        </div>
+    }
+</div>

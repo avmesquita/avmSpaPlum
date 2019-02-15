@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.FilialConfiguracao>
+
+@{
+	ViewBag.Title = "Lista de Configuração da Filial";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/datatables")
+	@Styles.Render("~/Content/datatables")
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#tabela-filial-configuracao').DataTable({
+				"language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+			});
+
+		});
+	</script>
+}
+<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Gestão de Configuração da Filial</h4>
+<br />
+<div style="float:right;padding-bottom:10px;padding-right:15px;">
+	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Nova Configuração" })
+</div>
+<div class="col-md-12">
+	<table id="tabela-filial-configuracao" class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>
+					@Html.DisplayNameFor(model => model.Filial.Nome)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EmailSmtpHost)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EmailSmtpPort)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EmailSmtpSSL)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EmailSmtpAccount)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.EmailSmtpPassword)
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.ActionLink(" ", "Edit", new { id = item.CodigoConfiguracao }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })
+						@Html.ActionLink(" ", "Details", new { id = item.CodigoConfiguracao }, new { @class = "btn btn-primary btn-large glyphicon glyphicon-list-alt", title = "Detalhes" })
+						@Html.ActionLink(" ", "Delete", new { id = item.CodigoConfiguracao }, new { @class = "btn btn-large btn-danger glyphicon glyphicon-trash", title = "Excluir" })
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Filial.Nome)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EmailSmtpHost)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EmailSmtpPort)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EmailSmtpSSL)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EmailSmtpAccount)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.EmailSmtpPassword)
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

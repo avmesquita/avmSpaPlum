@@ -1,0 +1,67 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SpaPlum.Web.Models.ApplicationUser>
+
+@{
+	ViewBag.Title = "Gestão de Usuários";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/datatables")
+	@Styles.Render("~/Content/datatables")
+
+	<script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tabela-usuarios').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+            });
+
+        });
+	</script>
+}
+<h4 style="text-decoration:underline;">Gestão de Usuários</h4>
+<br />
+
+<div class="col-md-8">
+	<table id="tabela-usuarios" class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>
+					Nome
+				</th>
+				<th>
+					Email
+				</th>
+				<th>
+					Perfil
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+			<tr>
+				<td>
+					@Html.ActionLink(" ", "Edit", new { id = item.CodigoCliente }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })
+					@Html.ActionLink(" ", "Details", new { id = item.CodigoCliente }, new { @class = "btn btn-primary btn-large glyphicon glyphicon-list-alt", title = "Detalhes" })
+					@Html.ActionLink(" ", "Delete", new { id = item.CodigoCliente }, new { @class = "btn btn-large btn-danger glyphicon glyphicon-trash", title = "Excluir" })
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nome)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Email)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CodigoPerfil)
+				</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>
+

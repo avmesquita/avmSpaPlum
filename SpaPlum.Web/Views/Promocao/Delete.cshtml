@@ -1,0 +1,124 @@
+﻿@model SpaPlum.Web.Entity.Promocao
+
+@{
+    ViewBag.Title = "Exclusão de Promoção";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:30px;" })
+</div>
+
+<div class="col-md-8">
+    <h3 style="color:red;text-align:center;"><b>Tem certeza que deseja excluir?</b></h3>
+    <div style="padding-top:30px;">
+        <h4 style="text-decoration:underline;">Detalhes da Promoção</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Filial.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Filial.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.NomeHtml)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.NomeHtml)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.TipoPromocao)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.TipoPromocao)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Valor)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Valor)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Token)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Token)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DataCadastro)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DataInicioVigencia)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DataInicioVigencia)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DataFimVigencia)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DataFimVigencia)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.TempoMinimo)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.TempoMinimo)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ValorMinimo)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ValorMinimo)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Ativo)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-top:30px;text-align:center;">
+            <input type="submit" value="Excluir" class="btn btn-default btn-primary btn-danger" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+        </div>
+}
+    </div>
+</div>

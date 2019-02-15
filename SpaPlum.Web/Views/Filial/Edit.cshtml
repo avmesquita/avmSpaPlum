@@ -1,0 +1,68 @@
+﻿@model SpaPlum.Web.Entity.Filial
+
+@{
+    ViewBag.Title = "Edição de Filial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+</div>
+
+<div class="col-md-8">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Edição de Filial</h4>
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.CodigoFilial)
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				<div class="checkbox">
+					@Html.EditorFor(model => model.Ativo)
+					@Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.EmailPrincipalFilial, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				<div class="checkbox">
+					@Html.EditorFor(model => model.EmailPrincipalFilial)
+					@Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.EmailSecundarioFilial, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				<div class="checkbox">
+					@Html.EditorFor(model => model.EmailSecundarioFilial)
+					@Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group" style="padding-top:30px;text-align:center;">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Gravar" class="btn btn-default btn-primary btn-success" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+			</div>
+		</div>
+	</div>
+    }
+</div>

@@ -1,0 +1,59 @@
+﻿@model SpaPlum.Web.Entity.Plano
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Plano</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VigenciaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VigenciaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VigenciaFim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VigenciaFim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preco)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoPlano }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

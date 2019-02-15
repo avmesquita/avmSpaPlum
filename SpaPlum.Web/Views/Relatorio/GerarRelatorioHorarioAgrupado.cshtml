@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.HorarioTerapeuta>
+
+@{
+    ViewBag.Title = "Relatório de Horários Agrupado";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>GerarRelatorioHorarioAgrupado</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Terapeuta.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoDiaDaSemana)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorarioInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorarioFim)
+        </th>        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Terapeuta.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoDiaDaSemana)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HorarioInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HorarioFim)
+        </td>
+    </tr>
+}
+
+</table>

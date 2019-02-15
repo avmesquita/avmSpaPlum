@@ -1,0 +1,68 @@
+﻿@model SpaPlum.Web.Entity.FilialConfiguracao
+
+@{
+    ViewBag.Title = "Detalhes da Configuração da Filial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+</div>
+
+<div class="col-md-8">
+    <div>
+        <h4 style="text-decoration:underline;">Configuração da Filial</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Filial.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Filial.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpHost)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpHost)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpPort)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpPort)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpSSL)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpSSL)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpAccount)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpAccount)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSmtpPassword)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSmtpPassword)
+            </dd>
+        </dl>
+    </div>
+    <p style="padding-top:30px;">
+        @Html.ActionLink(" ", "Edit", new { id = Model.CodigoConfiguracao }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-error", title = "Voltar" })
+    </p>
+</div>

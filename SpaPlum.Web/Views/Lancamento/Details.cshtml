@@ -1,0 +1,94 @@
+﻿@model SpaPlum.Web.Entity.Lancamento
+
+@{
+    ViewBag.Title = "Detalhes do Lançamento";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Corpus SPA</h2>
+
+<div>
+    <h4 style="text-decoration:underline;">Detalhes do Lancamento</h4>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.CodigoTipoOperacao)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@{
+				var operacoes = new SpaPlum.Web.Helpers.ListaTipoOperacao().TipoOperacaoLista;
+				var operacao = operacoes.Where(x => x.Value == Model.CodigoTipoOperacao.ToString()).FirstOrDefault().Text;
+			}
+			@Html.Display(operacao)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.TipoPagamento.Descricao)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.TipoPagamento.Descricao)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.Titulo)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.Titulo)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.Descricao)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.Descricao)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.DataVencimento)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.DataVencimento)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.DataPagamento)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.DataPagamento)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.DataLancamento)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.DataLancamento)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.Valor)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.Valor)
+		</dd>
+
+		<dt style="font-size:16px;line-height:30px;">
+			@Html.DisplayNameFor(model => model.ValorMulta)
+		</dt>
+
+		<dd style="font-size:16px;line-height:30px;">
+			@Html.DisplayFor(model => model.ValorMulta)
+		</dd>
+
+	</dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoLancamento }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

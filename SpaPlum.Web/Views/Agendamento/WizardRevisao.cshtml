@@ -1,0 +1,128 @@
+﻿@model SpaPlum.Web.Entity.Agendamento
+
+@{
+    ViewBag.Title = "Agendamento em 5 passos";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+
+<div class="row">
+    <div class="form-horizontal">
+        <h3>Agendamento em 5 passos</h3>
+        <hr />
+        <div class="col-md-10">
+            <dl class="dl-horizontal">
+                <dt>Local</dt>
+                <dd>@Html.DisplayFor(modelItem => new SpaPlum.Web.Contexto.AgendamentoContexto().FilialModels.Find(Model.CodigoFilial).Nome)</dd>
+
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+
+                <dt>Data Inicial</dt>
+                <dd>@Html.DisplayFor(model => model.DataInicial)</dd>
+
+                <dt>Data Final</dt>
+                <dd>@Html.DisplayFor(model => model.DataFinal)</dd>
+
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+
+                <dt>Forma de Pagamento</dt>
+                <dd>@Html.DisplayFor(modelItem => new SpaPlum.Web.Contexto.AgendamentoContexto().TipoPagamentoModels.Find(Model.CodigoTipoPagamento).Descricao)</dd>
+
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+
+                <dt>Valor</dt>
+                <dd>@Html.DisplayFor(model => model.Valor)</dd>
+
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+
+
+                <dt>Nome</dt>
+                <dd>@Html.DisplayFor(model => model.NomeCliente)</dd>
+
+                <dt>E-Mail</dt>
+                <dd>@Html.DisplayFor(model => model.EmailDoCliente)</dd>
+
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+
+                <dt>Observação</dt>
+                <dd>@Html.DisplayFor(model => model.Observacao)</dd>
+
+                <dt>&nbsp;</dt>
+                <dd>&nbsp;</dd>
+            </dl>
+        </div>
+        <br /><br />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">        
+            <table class="table" style="zoom:80%; width:60%">
+                <tr>
+                    <th>Terapia</th>
+                    <th>Tipo</th>
+                    <th style="text-align:center;">Períodos</th>
+                    <th>Terapeuta</th>
+                    <th style="text-align:right;">Valor Unit.</th>
+                    <th style="text-align:right;">Valor Total</th>
+                </tr>
+
+                @foreach (var item in Model.ItensDoAgendamento)
+            {
+
+                var servico = new SpaPlum.Web.Contexto.AgendamentoContexto().ServicoModels.Find(item.CodigoServico).Nome;
+                var terapeuta = new SpaPlum.Web.Contexto.AgendamentoContexto().TerapeutaModels.Find(item.CodigoTerapeuta).Nome;
+                var tipo = new SpaPlum.Web.Helpers.ListaTipoDeMassagem().Lista.Where(x => x.Value.Equals(item.TipoDeMassagem.ToString())).FirstOrDefault().Text;
+                var fator = 1;
+                if (item.TipoDeMassagem > 0)
+                {
+                    fator = 2;
+                }
+
+                <tr>
+                    <td>@servico</td>
+                    <td>@tipo</td>
+                    <td style="text-align:center;">@item.QtdePeriodos</td>
+                    <td>@terapeuta</td>
+                    <td style="text-align:right;">@item.Valor</td>
+                    <td style="text-align:right;">@(item.Valor * item.QtdePeriodos * fator)</td>
+                </tr>}
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td style="text-align:right;">@Html.DisplayFor(model => model.Valor)</td>
+                </tr>
+
+            </table>        
+    </div>
+</div>
+
+<dl class="dl-horizontal">
+    <dt>&nbsp;</dt>
+    <dd>&nbsp;</dd>
+</dl>
+
+<div class="col-md-10">
+    <br /><br />
+    <input type="submit" value="Finalizar!" class="btn btn-default btn-success" id="btnGravarAgendamento" name="btnGravarAgendamento" style="height:40px;width:300px;" />
+    <br /><br />
+</div>
+
+<dl class="dl-horizontal">
+    <dt>&nbsp;</dt>
+    <dd>&nbsp;</dd>
+    <dt>&nbsp;</dt>
+    <dd>&nbsp;</dd>
+</dl>
+
+
+@section Scripts {
+
+}

@@ -1,0 +1,125 @@
+﻿@model SpaPlum.Web.Entity.Fornecedor
+
+@{
+    ViewBag.Title = "Detalhes do Fornecedor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+    @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+</div>
+
+<div class="col-md-8">
+    <div>
+        <h4 style="text-decoration:underline;">Detalhes do Fornecedor</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                Filial
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @*@Html.DisplayFor(model => model.Filial.Nome)*@
+                @(new SpaPlum.Web.Contexto.AgendamentoContexto().FilialModels.Where(x => x.CodigoFilial == Model.CodigoFilial).FirstOrDefault().Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.ForneceOque)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.ForneceOque)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                Telefones
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Telefone1)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                &nbsp;
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Telefone2)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                &nbsp;
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Telefone3)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Celular)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Celular)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailPrincipal)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailPrincipal)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.EmailSecundario)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.EmailSecundario)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Endereço)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Endereço)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Observacao)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Observacao)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Ativo)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Ativo)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.DataCadastro)
+            </dd>
+        </dl>
+    </div>
+    <p style="padding-top:30px;text-align:center;">
+        @Html.ActionLink(" ", "Edit", new { id = Model.CodigoFornecedor }, new { @class = "btn btn-success btn-large glyphicon glyphicon-pencil", title = "Editar" })&nbsp;&nbsp;@Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+    </p>
+</div>

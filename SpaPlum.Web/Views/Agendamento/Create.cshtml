@@ -1,0 +1,536 @@
+﻿@model SpaPlum.Web.Entity.Agendamento
+
+@{
+	ViewBag.Title = "Agendamento de Serviços";
+	Layout = "~/Views/Shared/_AgendamentoLayout.cshtml";
+}
+@Scripts.Render("~/bundles/moment")
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<style>
+	.datepicker {
+		width: 250px;
+		position: relative;
+	}
+</style>
+<div class="col-md-12">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal" style="zoom:90%;">
+			<h4>Novo Agendamento</h4>
+			<hr />
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+			@Html.HiddenFor(model => model.ClubeVIP, " ")
+			@Html.HiddenFor(model => model.DataFinal)
+			@Html.Hidden("CodigoTipoDeMassagem", "0")
+
+			@if (HttpContext.Current.User.Identity.Name == "")
+			{
+				@Html.Hidden("CodigoStatusAgendamento", "1")
+			}
+
+			<div class="col-md-7">
+				<fieldset>
+					<div class="col-md-6" style="padding-top:20px;">
+						<div class="form-group">
+							@Html.Label("Quando?", htmlAttributes: new { @class = "control-label col-md-3", style = "font-family:fantasy;font-size:16px;padding-top:20px;" })
+							<div class="col-md-4">
+								<i class="fas fa-calendar-alt fa-2x"></i><br />
+								@Html.EditorFor(model => model.DataInicial, new { htmlAttributes = new { @class = "form-control datecontrol", style = "padding-top:10px;" } })
+								@Html.ValidationMessageFor(model => model.DataInicial, "", new { @class = "text-danger" })
+							</div>
+							<div class="col-md-4">
+								<i class="far fa-clock fa-2x"></i><br />
+								@Html.EditorFor(model => model.HoraInicial, new { htmlAttributes = new { @class = "form-control datecontrol", style = "padding-top:10px;" } })
+								@Html.ValidationMessageFor(model => model.HoraInicial, "", new { @class = "text-danger" })
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6" style="padding-top:20px;">
+						<div class="form-group">
+							@Html.Label("Onde?", htmlAttributes: new { @class = "control-label col-md-2", style = "font-family:fantasy;font-size:16px;padding-top:20px;" })
+							<div class="col-md-10">
+								<i class="fas fa-map-marker-alt fa-2x"></i><br />
+								@Html.DropDownList("CodigoFilial", new SelectList(ViewBag.ListaFilial, "Value", "Text"), "Selecione a Filial...", new { htmlAttributes = new { @class = "form-control dropdown" }, style = "min-width:200px;width:auto;height:33px;" })
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-6" style="padding-top:20px;">
+						<div class="form-group">
+							@Html.Label("Serviço?", htmlAttributes: new { @class = "control-label col-md-3", style = "font-family:fantasy;font-size:16px;padding-top:20px;" })
+							<div class="col-md-8 col-md-offset-1 col-md-pull-1">
+								<i class="fas fa-cogs fa-2x"></i><br />
+								@Html.DropDownList("CodigoServico", Enumerable.Empty<SelectListItem>(), "Selecione o Serviço...", new { htmlAttributes = new { @class = "form-control" }, style = "min-width:200px;width:auto;height:33px;", @disabled = "disabled" })
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6" style="padding-top:20px;">
+						<div class="form-group">
+							@Html.Label("Quem?", htmlAttributes: new { @class = "control-label col-md-2", style = "font-family:fantasy;font-size:16px;padding-top:20px;" })
+							<div class="col-md-10">
+								<i class="fas fa-users fa-2x"></i><br />
+								@Html.DropDownList("CodigoTerapeuta", Enumerable.Empty<SelectListItem>(), "Selecione o Profissional...", new { htmlAttributes = new { @class = "form-control" }, style = "min-width:200px;width:auto;height:33px;", @disabled = "disabled" })
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-6" style="padding-top:20px;">
+						<div class="form-group">
+							@Html.Label("Tipo?", htmlAttributes: new { @class = "control-label col-md-3", style = "font-family:fantasy;font-size:16px;" })
+							<div class="col-md-8 col-md-offset-1 col-md-pull-1">
+								@Html.RadioButton("TipoDeMassagem", "Massagem Padrão", new { Id = 0, Value = 0, Text = "Massagem Padrão" })<span style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:18px;">&nbsp;Massagem Padrão</span><br />
+								@Html.RadioButton("TipoDeMassagem", "Massagem 4 Mãos", new { Id = 1, Value = 1, Text = "Massagem 4 Mãos" })<span style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:18px;">&nbsp;Massagem 4 Mãos</span><br />
+								@Html.RadioButton("TipoDeMassagem", "Massagem Para Casais", new { Id = 2, Value = 2, Text = "Massagem Para Casais" })<span style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:18px;">&nbsp; Massagem Para Casais</span><br />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6" style="padding-top:20px;">
+						<div class="form-group">
+							<span class="control-label col-md-2" style="font-family:fantasy;font-size:16px;padding-top:20px;">Quanto?</span>
+							<div class="col-md-10">
+								<i class="fas fa-sort-amount-up fa-2x"></i><br />
+								@Html.Editor("QuantidadePeriodos", "1", new { htmlAttributes = new { @class = "form-control", style = "max-width:50px;" } })
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-12" style="padding-top:20px;">
+						<input type="button" id="btnAdicionar" name="btnAdicionar" value="Adicionar na Sacola" class="btn btn-primary btn-dark" />
+					</div>
+					<div class="clearfix"></div>
+				</fieldset>
+			</div>
+
+			<div class="col-md-4">
+				<fieldset>
+					<legend>Serviços Selecionados</legend>
+					<div id="resultado">
+						Nenhum Serviço adicionado na sacola<br /><br />
+					</div>
+					<p><input type="button" id="btnLimparSacola" name="btnLimparSacola" value="Limpar Sacola" class="btn btn-primary btn-danger" /></p>
+					<br />
+
+				</fieldset>
+				<div class="clearfix"></div>
+				<fieldset>
+					<!--<legend>Preço & Pagamento</legend>-->
+					<div class="form-group">
+						<i class="fas fa-dollar fa-2x control-label col-md-2"></i>
+						@*Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2", style = "font-family:fantasy;font-size:16px;" })*@
+						<div class="col-md-10">
+							@{
+								var perfil = SpaPlum.Web.Models.UserExtendedModel.GetCodigoPerfil(HttpContext.Current.User);
+								if (perfil != null)
+								{
+									if (perfil.Equals("0") || perfil.Equals("1"))
+									{
+										@Html.EditorFor(model => model.Valor, "0,00", new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", id = "Valor", name = "Valor" } })
+									}
+									else
+									{
+										@Html.EditorFor(model => model.Valor, "0,00", new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", id = "Valor", name = "Valor" } })
+									}
+								}
+								else
+								{
+									@Html.Raw("<span style='font-family:fantasy;font-size:24px;'>0,00</span>");
+
+								}
+							}
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="form-group">
+						<i class="fas fa-credit-card fa-2x control-label col-md-2"></i>
+						@*Html.LabelFor(model => model.CodigoTipoPagamento, "Pagamento", htmlAttributes: new { @class = "control-label col-md-2", style = "font-family:fantasy;font-size:16px;" })*@
+						<div class="col-md-10">
+							@Html.DropDownList("CodigoTipoPagamento", new SelectList(ViewBag.ListaTipoPagamento, "Value", "Text"), "Selecione a forma de pagamento...", new { htmlAttributes = new { @class = "form-control" }, style = "width:auto;min-width:400px;height:33px;" })
+							@Html.ValidationMessageFor(model => model.CodigoTipoPagamento, "", new { @class = "text-danger" })
+						</div>
+					</div>
+					@if (HttpContext.Current.User.Identity.Name != "")
+					{
+						<div class="clearfix"></div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.ValorTaxaAdicional, "Adicional", htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.EditorFor(model => model.ValorTaxaAdicional, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.ValorTaxaAdicional, "", new { @class = "text-danger" })
+							</div>
+						</div>
+					}
+				</fieldset>
+
+				<br /><br />
+				<fieldset>
+					<!--
+					<legend>Identificação e Observação</legend>
+					<div class="form-group">
+						@Html.LabelFor(model => model.NomeCliente, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.NomeCliente, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.NomeCliente, "", new { @class = "text-danger" })
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="form-group">
+						@Html.LabelFor(model => model.EmailDoCliente, "E-Mail", htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.EmailDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.EmailDoCliente, "", new { @class = "text-danger" })
+						</div>
+					</div>
+						-->
+					@*
+						<div class="clearfix"></div>
+						<div class="form-group">
+							@Html.LabelFor(model => model.TelefoneDoCliente, "Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.EditorFor(model => model.TelefoneDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.TelefoneDoCliente, "", new { @class = "text-danger" })
+							</div>
+						</div>
+					*@
+					<!--<div class="clearfix"></div>-->
+					<div class="form-group">
+						@Html.LabelFor(model => model.Observacao, "OBS", htmlAttributes: new { @class = "control-label col-md-2", style = "font-family:fantasy;font-size:16px;" })
+						<div class="col-md-10">
+							@Html.EditorFor(model => model.Observacao, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+						</div>
+					</div>
+				</fieldset>
+
+				@if (HttpContext.Current.User.Identity.Name != "")
+				{
+					<div class="form-group">
+						@Html.LabelFor(model => model.CodigoStatusAgendamento, htmlAttributes: new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							@Html.DropDownList("CodigoStatusAgendamento", new SelectList(ViewBag.ListaStatusAgendamento, "Value", "Text"), "Selecione o Status...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })
+							@Html.ValidationMessageFor(model => model.CodigoStatusAgendamento, "Você deve selecionar um dia da semana para prosseguir.", new { @class = "text-danger" })
+						</div>
+					</div>
+				}
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						@*<input type="submit" value="Agendar" onclick="javascript: return validarAgendamento();" class="btn btn-default btn-primary" />*@
+						<input type="button" id="btnGravarAgendamento" name="btnGravarAgendamento" value="Agendar" class="btn btn-default btn-primary btn-success" style="width:300px;" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+	}
+</div>
+@if (HttpContext.Current.User.Identity.Name != "")
+{
+	<div>
+		@Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar" })
+	</div>
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/datatables")
+	@Styles.Render("~/Content/datatables")
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			if (!Modernizr.inputtypes.date) {
+				$(function () {
+					$(".datecontrol").datepicker();
+				});
+			}
+			$("#DataInicial").datetimepicker({ format: 'DD/MM/YYYY' });
+
+			$("#HoraInicial").datetimepicker({ format: 'HH:mm', stepping: 30 });
+			/*
+			$("#DataInicial").datetimepicker(
+				{
+					defaultDate: new Date(),
+					format: 'DD/MM/YYYY HH:mm',
+					toolbarPlacement: 'bottom',
+					stepping: 1,
+					daysOfWeekDisabled: [0],
+					sideBySide: true,
+					collapse: false,
+					inline: true
+					, keepInvalid: true
+				});
+			*/
+			var Items = new Object();
+			Items.ItensDeAgendamento = new Array();
+
+			$("#QuantidadePeriodos").val(1);
+			$('#Valor').val('0,00');
+			$('#ValorTaxaAdicional').val('0');
+
+			var tipoMassagem = "0";
+			var radios = document.querySelectorAll('input[type=radio][name=TipoDeMassagem]');
+			for (var i = 0; i < radios.length; i++) {
+				if (i === 0) {
+					tipoMassagem = i.toString();
+					radios[i].checked = true;
+				}
+			}
+			$('#TipoDeMassagem').val(tipoMassagem);
+
+			$('#CodigoFilial').change(function () {
+				$.ajax({
+					url: '/Agendamento/ServicosPorFilial',
+					type: 'POST',
+					data: { codigoFilial: $(this).val() },
+					datatype: 'json',
+					success: function (data) {
+						var options = '';
+						var precoInicial = 0;
+						$.each(data, function () {
+
+							if (precoInicial == 0) {
+								if (this.EmPromocao == true) {
+									precoInicial = this.ValorPromocao;
+								} else {
+									precoInicial = this.Valor;
+								}
+							}
+							options += '<option value="' + this.CodigoServico + '">' + this.Nome + '</option>';
+						});
+						$('#CodigoServico').prop('disabled', false).html(options);
+						$('#Valor').val('0,00');
+					}
+				});
+
+				$.ajax({
+					url: '/Agendamento/TerapeutasDisponiveisPorFilialHorario',
+					type: 'POST',
+					data: { codigoFilial: $(this).val(), dataAgendamento: $('#DataInicial').val() },
+					datatype: 'json',
+					success: function (data) {
+						var options = '';
+						$.each(data, function () {
+							options += '<option value="' + this.CodigoTerapeuta + '">' + this.Nome + '</option>';
+						});
+						$('#CodigoTerapeuta').prop('disabled', false).html(options);
+					}
+				});
+				$.ajax({
+					url: '/Agendamento/FormasDePagamentoPorFilial',
+					type: 'POST',
+					data: { codigoFilial: $(this).val() },
+					datatype: 'json',
+					success: function (data) {
+						var options = '';
+						$.each(data, function () {
+							options += '<option value="' + this.CodigoTipoPagamento + '">' + this.Descricao + '</option>';
+						});
+						$('#CodigoTipoPagamento').prop('disabled', false).html(options);
+					}
+				});
+			});
+
+			$('#btnLimparSacola').click(function () {
+				Items.ItensDeAgendamento = [];
+				$('#resultado').empty();
+				$('#resultado').val('Nenhuma Terapia adicionado na sacola<br /><br />');
+			});
+
+
+			$('#btnAdicionar').click(function () {
+
+				/* INICIALIZA VARIAVEIS */
+				var var_idservico = $("#CodigoServico").val();
+				var var_nome = "";
+				var var_tipomassagem = "";
+				var var_qtdeperiodos = 1;
+				var var_precoservico = 0;
+				var var_codigoterapeuta = 0;
+				var var_nometerapeuta = "";
+
+				/* CARREGA OS DADOS DO SERVICO */
+				$.ajax({
+					url: '/Agendamento/ObtemPrecoServico',
+					type: 'POST',
+					data: { codigoServico: $("#CodigoServico").val() },
+					datatype: 'json',
+					success: function (data) {
+						if (data.EmPromocao == true) {
+							var_precoservico = data.ValorPromocao;
+						} else {
+							var_precoservico = data.Valor;
+						}
+
+						var var_nome = data.Nome.toString();
+
+						var tipoMassagem = "0";
+						var radios = document.querySelectorAll('input[type=radio][name=TipoDeMassagem]');
+						for (var i = 0; i < radios.length; i++) {
+							if (radios[i].checked) {
+								tipoMassagem = i.toString();
+							}
+						}
+
+						if (tipoMassagem === "0") {
+							var nomeMassagem = "Padrão";
+						} else
+							if (tipoMassagem === "1") {
+								var nomeMassagem = "4 Mãos";
+							}
+							else {
+								var nomeMassagem = "Para Casais";
+							}
+
+						var var_tipomassagem = nomeMassagem;
+						var var_qtdeperiodos = $("#QuantidadePeriodos").val();
+						var var_codigoterapeuta = $("#CodigoTerapeuta").val();
+
+						var e = document.getElementById("CodigoTerapeuta");
+						var strTerapeuta = e.options[e.selectedIndex].text;
+						var var_nometerapeuta = strTerapeuta;
+
+						Items.ItensDeAgendamento.push(new Object({ CodigoServico: var_idservico, Nome: var_nome, TipoDeMassagem: tipoMassagem, DescricaoTipoDeMassagem: var_tipomassagem, QtdePeriodos: var_qtdeperiodos, Valor: var_precoservico, CodigoTerapeuta: var_codigoterapeuta, NomeTerapeuta: var_nometerapeuta }));
+
+						$("#resultado").empty();
+						$("#resultado").append("<table class='table-condensed' width='100%' zoom:'80%' id='sacola-de-compras'>")
+						$("#resultado").append("<thead>");
+						$("#resultado").append("<tr>");
+						$("#resultado").append("<th style='text-align:left'>Terapia</th>");
+						$("#resultado").append("<th style='text-align:left'>Terapeuta</th>");
+						$("#resultado").append("<th style='text-align:left'>Tipo</th>");
+						$("#resultado").append("<th style='text-align:left'>Periodos</th>");
+						$("#resultado").append("<th style='text-align:right'>Valor</th>");
+						$("#resultado").append("<th style='text-align:right'>Total</th>");
+						$("#resultado").append("</tr>");
+						$("#resultado").append("</thead>");
+						$("#resultado").append("<tbody>");
+						var valorTotal = 0;
+						$(Items.ItensDeAgendamento).each(function () {
+							$("#resultado").append("<tr>")
+							$("#resultado").append("<td style='text-align:left;width:40%;'>" + this.Nome + "</td>");
+							$("#resultado").append("<td style='text-align:left;width:20%;'>" + this.NomeTerapeuta + "</td>");
+							$("#resultado").append("<td style='text-align:left;width:10%;'>" + this.DescricaoTipoDeMassagem + "</td>");
+							$("#resultado").append("<td style='text-align:right;width:10%'>" + this.QtdePeriodos + "</td>");
+							$("#resultado").append("<td style='text-align:right;width:10%;'>" + this.Valor + "</td>");
+
+							var fator = 1;
+							if (this.TipoDeMassagem != "0") {
+								fator = 2;
+							}
+							var totalCalculado = this.Valor * this.QtdePeriodos * fator;
+							$("#resultado").append("<td style='text-align:right;width:10%;'>" + (totalCalculado) + "</td>");
+							$("#resultado").append("</tr>");
+
+							valorTotal = valorTotal + this.QtdePeriodos * (this.Valor * fator);
+						});
+						$("#resultado").append("<tr>")
+						$("#resultado").append("<td colspan='5'>&nbsp;</td>");
+						$("#resultado").append("</tr>")
+						$("#resultado").append("<tr>")
+						$("#resultado").append("<td style='text-align:left;width:40%;'>&nbsp;</td>");
+						$("#resultado").append("<td style='text-align:left;width:20%;'>&nbsp;</td>");
+						$("#resultado").append("<td style='text-align:left;width:10%;'>&nbsp;</td>");
+						$("#resultado").append("<td style='text-align:right;width:10%'>&nbsp;</td>");
+						$("#resultado").append("<td style='text-align:right;width:10%'>&nbsp;</td>");
+						$("#resultado").append("<td style='text-align:right;width:10%;'><b>" + valorTotal.toString() + "</b></td>");
+						$("#resultado").append("</tr>");
+						$("#resultado").append("</tbody>");
+						$("#resultado").append("</table>")
+						$("#Valor").val(valorTotal);
+						$("#resultado").append("<script> $('#sacola-de-compras').DataTable({ 'language': { 'url': '//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json' } });<\/script>");
+
+
+						$('#CodigoTerapeuta').val("Selecione uma terapeuta...");
+						$('#CodigoServico').val("Selecione uma terapia...");
+						$('#TipoDeMassagem').val(0);
+						$('#QuantidadePeriodos').val(1);
+						//})
+					}
+				});
+			});
+
+			$('#btnGravarAgendamento').click(function () {
+				if (Items.ItensDeAgendamento.length > 0) {
+					var data = {
+						DataInicial: $('#DataInicial').val(),
+						CodigoFilial: $('#CodigoFilial').val(),
+						Valor: $('#Valor').val(),
+						CodigoTipoPagamento: $('#CodigoTipoPagamento').val(),
+						NomeCliente: $('#NomeCliente').val(),
+						EmailDoCliente: $('#EmailDoCliente').val(),
+						Observacao: $('#Observacao').val(),
+						CodigoStatusAgendamento: $('#CodigoStatusAgendamento').val(),
+						ItensDoAgendamento: Items.ItensDeAgendamento
+					}
+
+					$(this).val('Aguarde...');
+
+					$.ajax({
+						url: '/Agendamento/GravarAgendamento/',
+						type: 'POST',
+						data: JSON.stringify(data),
+						dataType: 'JSON',
+						contentType: 'application/json',
+						success: function (d) {
+							if (d.status == true) {
+								var sucessoURL = '/Agendamento/Agendado?auth=' + d.auth;
+								window.location.href = sucessoURL;
+							} else {
+								$(this).val('Agendar');
+							}
+						},
+						error: function (d) {
+							$(this).val('Agendar');
+						}
+					});
+					$(this).val('Agendar');
+
+				}
+			});
+
+			$('#CodigoServico').change(function () {
+				$.ajax({
+					url: '/Agendamento/TerapeutasPorServicoFilialHorario',
+					type: 'POST',
+					data: { codigoFilial: $('#CodigoFilial').val(), dataAgendamento: $('#DataInicial').val(), codigoServico: $(this).val() },
+					datatype: 'json',
+					success: function (data) {
+						var options = '';
+						if (data) {
+							$.each(data, function () {
+								options += '<option value="' + this.CodigoTerapeuta + '">' + this.Nome + '</option>';
+							});
+						} else {
+							options += '<option value="-1">Terapeutas indisponíveis neste serviço/horário.</option>';
+						}
+						$('#CodigoTerapeuta').prop('disabled', false).html(options);
+					}
+				});
+			});
+
+			$.validator.methods.range = function (value, element, param) {
+				var val = $.global.parseFloat(value);
+				return this.optional(element) || (val >= param[0] && val <= param[1]);
+			}
+
+			$.validator.methods.number = function (value, element) {
+				return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+			}
+
+			$.validator.methods.date = function (value, element) {
+				return true; /*this.optional(element) || /^\d\d?\/\d\d?\/\d\d\d?\d?$/.test(value);*/
+			};
+		});
+
+
+		function validarAgendamento() {
+
+			return true;
+		}
+
+	</script>
+
+}

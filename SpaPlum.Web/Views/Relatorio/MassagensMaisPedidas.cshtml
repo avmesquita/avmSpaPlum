@@ -1,0 +1,114 @@
+﻿@model SpaPlum.Web.Models.FiltroAgendamentoViewModel
+@{
+    ViewBag.Title = "Massagens Mais Pedidas";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Massagens Mais Pedidas</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <h4>@Html.Label("Filtro")</h4>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.Label("Filial", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CodigoFilial", new SelectList(ViewBag.ListaFilial, "Value", "Text"), "Selecione a Filial...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Data Inicial", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.DataInicial, new { htmlAttributes = new { @class = "form-control", style = "width:100px;" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Data Final", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.DataFinal, new { htmlAttributes = new { @class = "form-control", style = "width:100px;" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Gerar" id="btnGerar" class="btn btn-default btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="conteudo" name="conteudo">
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datatables")
+    @Styles.Render("~/Content/datatables")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#massagens-mais-pedidas').DataTable();
+
+            if (!Modernizr.inputtypes.date) {
+                $(function () {
+                    $(".datecontrol").datepicker();
+                });
+            }
+
+            $("#DataInicial").datetimepicker(
+                            {
+                                defaultDate: new Date(new Date().setDate(new Date().getDate() - 30)),
+                                format: 'DD/MM/YYYY',
+                                toolbarPlacement: 'bottom',
+                                sideBySide: false,
+                                collapse: false,
+                                inline: false
+                                , keepInvalid: false
+                            });
+
+            $("#DataFinal").datetimepicker(
+                            {
+                                defaultDate: new Date(),
+                                format: 'DD/MM/YYYY',
+                                toolbarPlacement: 'bottom',
+                                sideBySide: false,
+                                collapse: false,
+                                inline: false
+                                , keepInvalid: false
+                            });
+
+            $("#CodigoFilial").focus();
+
+            $('#btnGerar').click(function () {
+                $("#conteudo").load("GerarRelatorioMassagensMaisPedidas", { 'CodigoFilial': $("#CodigoFilial").val(), 'DataInicial': $("#DataInicial").val(), 'DataFinal': $("#DataFinal").val() });
+            });
+
+            $.validator.methods.range = function (value, element, param) {
+                var val = $.global.parseFloat(value);
+                return this.optional(element) || (val >= param[0] && val <= param[1]);
+            }
+
+            $.validator.methods.number = function (value, element) {
+                return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+            }
+
+            $.validator.methods.date = function (value, element) {
+                return true; /*this.optional(element) || /^\d\d?\/\d\d?\/\d\d\d?\d?$/.test(value);*/
+            };
+        });
+    </script>
+}

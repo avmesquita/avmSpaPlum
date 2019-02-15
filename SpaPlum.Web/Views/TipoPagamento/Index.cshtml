@@ -1,0 +1,101 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<SpaPlum.Web.Entity.TipoPagamento>
+
+@{
+	ViewBag.Title = "Listagem de Formas de Pagto";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/datatables")
+	@Styles.Render("~/Content/datatables")
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#tabela-formas-pagto').DataTable({
+				"language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+			});
+
+		});
+	</script>
+}
+<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Gestão de Formas de Pagamento</h4>
+<br />
+<div style="float:right;padding-bottom:10px;padding-right:15px;">
+	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Nova Forma de Pagamento" })
+</div>
+<div class="col-md-12">
+	<table id="tabela-formas-pagto" class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>
+					Filial
+				</th>
+				<th>
+					Descrição
+				</th>
+				<th>
+					Ativo
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.ActionLink(" ", "Edit", new { id = item.CodigoTipoPagamento }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })
+						@Html.ActionLink(" ", "Details", new { id = item.CodigoTipoPagamento }, new { @class = "btn btn-primary btn-large glyphicon glyphicon-list-alt", title = "Detalhes" })
+						@*Html.ActionLink(" ", "Delete", new { id = item.CodigoTipoPagamento }, new { @class = "btn btn-large btn-danger glyphicon glyphicon-trash", title = "Excluir" })*@
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Filial.Nome)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Descricao)
+					</td>
+					@*
+								<td>
+									@Html.DisplayFor(modelItem => item.Taxa)
+								</td>
+						<td>
+							@if (item.TipoTaxa == "R")
+							{
+								@Html.Raw("Real")
+							}
+							else
+							{
+								@Html.Raw("Percentual")
+							}
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Mora)
+						</td>
+						<td>
+							@if (item.TipoMora == "R")
+							{
+								@Html.Raw("Real")
+							}
+							else
+							{
+								@Html.Raw("Percentual")
+							}
+						</td>
+					*@
+					<td>
+						@Html.DisplayFor(modelItem => item.Ativo)
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+@*
+	<div style="text-align: center">
+		@Html.PagedListPager(Model, (page) => Url.Action("Index", new { page = page }), PagedListRenderOptions.Classic)
+	</div>
+*@

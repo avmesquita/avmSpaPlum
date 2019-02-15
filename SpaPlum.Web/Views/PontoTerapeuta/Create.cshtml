@@ -1,0 +1,50 @@
+﻿@model SpaPlum.Web.Entity.PontoTerapeuta
+
+@{
+	ViewBag.Title = "Registro de Marcação de Ponto";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="float:right;width:150px;display:none;">
+	@Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar", style = "margin-top:10px;" })
+</div>
+
+<div class="col-md-8">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<h4>Marcação de Ponto</h4>
+			<hr />
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				@Html.LabelFor(model => model.CodigoTerapeuta, "Profissional", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownList("CodigoTerapeuta", null, htmlAttributes: new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.CodigoTerapeuta, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.Label("Registrante", htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.DropDownList("CodigoCliente", null, htmlAttributes: new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.CodigoCliente, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@DateTime.Now.ToString()
+				</div>
+			</div>
+
+			<div class="form-group" style="padding-top:30px;text-align:center;">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Registrar" class="btn btn-default btn-primary btn-success" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+				</div>
+			</div>
+		</div>
+	}
+</div>

@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html public lang="pt-br">
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<meta name="google-site-verification" content="218F0j2ZoGWReVWzfB4g-ihhscB6wJv9r6g2RDIsPfA" />
+	<title>SpaPlum - Agendamento de Serviços - @ViewBag.Title</title>
+	<meta name="description" content="SpaPlum é um gerenciador de agendamento para execução de serviços para seu controle" />
+	<meta name="keywords" content="serviços, agendamento, prático, simples, fácil gestão, pessoa, empresa">
+	<meta name="robots" content="index,nofollow">
+	<meta http-equiv="content-language" content="pt-br">
+
+	@Styles.Render("~/Content/cssCompromise")
+
+	@Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/moment")
+	@Scripts.Render("~/bundles/bootstrap")
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<script type='application/ld+json'>
+		{
+		"@@context": "http://www.schema.org",
+		"@@type": "LocalBusiness",
+		"name": "SpaPlum - Agendamento de Serviços",
+		"url": "http://www.spaplum.com.br",
+		"logo": "http://www.spaplum.com.br/Content/images/corpuspa.png",
+		"address": {
+		"@@type": "PostalAddress",
+		"streetAddress": "Rua Manoel Pachedo de Carvalho, 86, Piratininga",
+		"addressLocality": "Niteroi",
+		"addressRegion": "RJ",
+		"postalCode": "24350-401",
+		"addressCountry": "Brasil"
+		},
+		"contactPoint": {
+		"@@type": "ContactPoint",
+		"telephone": "(21) 3587-2011",
+		"telephone": "(21) 9-8641-5221"
+		"email": "contato@spaplum.com.br",
+		},
+		"sameAs": ["http://www.facebook.com/spaplum/",
+		"https://www.instagram.com/spaplum/",
+		"https://www.pinterest.com/spaplum",
+		"http://www.avmsistemas.net"],
+		"hasMap": "https://www.google.com.br/maps/place/AVM+Sistemas/@@-22.942842,-43.05653,15z/data=!4m2!3m1!1s0x0:0x629627d8f3b62b11?sa=X&ved=2ahUKEwiFpqi1xaTdAhUIHpAKHRa5BAMQ_BIwCnoECAgQCw",
+		"openingHours": "Mo, Tu, We, Th, Fr 09:00-21:00 Sa 09:00-18:00"
+		}
+	</script>
+	<script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+		@if (Environment.UserInteractive)
+		{
+			//spaplum.avmsistemas.net
+			Html.Raw("ga('create', 'UA-23209130-8');");
+		}
+		else
+		{
+			//www.spaplum.com.br
+			Html.Raw("ga('create', 'UA-23209130-9');");
+		}
+		ga('send', 'pageview');
+						@if (HttpContext.Current.User.Identity.IsAuthenticated)
+						{
+							var strUsuario = HttpContext.Current.User.Identity.Name.ToString();
+							if (!strUsuario.Contains("@"))
+							{
+								strUsuario = SpaPlum.Web.Models.UserExtendedModel.GetNome(User).ToString();
+							}
+							@Html.Raw("ga('set', 'userId', '" + strUsuario + "');");
+						}
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="col-md-12" id="avm-header">
+			<div class="row" id="avm-top" style="background-color:#FFFFFF;height:130px;margin-top:0;">
+				<h1 style="color:#FF7900;padding-top:10px;padding-left:30px;">
+					<a href="/" style="text-decoration:none;font-size:60px;font-family:'Edwardian Script ITC'">SpaPlum</a>
+					<p style="color:gray;font-family:fantasy;padding-top:14px;font-size:14px;">
+						Agendamento de Serviços
+					</p>
+
+				</h1>
+			</div>
+			<style>
+				li {
+					float: left;
+					text-decoration: none;
+				}
+				li a {
+					display: block;
+					color: white;
+					text-align: center;
+					padding: 14px 16px;
+					text-decoration: none;
+				}
+				/* Change the link color to #111 (black) on hover */
+				li a:hover {
+							background-color: #FF7900;
+							text-decoration: none;
+							color: #FFFFFF;
+						}
+				.active {
+					background-color: #FF7900;
+					text-decoration: none;
+					color: #FFFFFF;
+				}
+			</style>
+
+			<div class="row" id="avm-menu" style="background-color:#2F4F4F;color:white;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;border-bottom:solid;border-bottom-color:#FF7900;">
+				<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+					<li class="active" style="display:inline;">
+						@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)
+					</li>
+
+					@if (HttpContext.Current.User.Identity.IsAuthenticated)
+		{
+						<li style="display:inline;">@Html.ActionLink("Agendar Agora", "Create", "Agendamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+
+						<li style="display:inline;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+
+						<li style="display:inline;">@Html.ActionLink("Disponibilidade", "DisponibilidadeDeTerapeutas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+
+						@Html.Partial("_LoginPartialCompromiseMenu")
+					}
+
+					@*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>*@
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="row" id="avm-content">
+			<div class="col-md-3" id="avm-sidebar" style="padding-top:20px;background-color:darkgray;min-height:100%;">
+				@if (HttpContext.Current.User.Identity.IsAuthenticated)
+				{
+					// 0 - Development | 1 - Administrador | 2 - Cliente | 3 - Profissional (Ponto) | 4 - Gerente
+					var perfil = SpaPlum.Web.Models.UserExtendedModel.GetCodigoPerfil(HttpContext.Current.User);
+
+					if (perfil.Equals("0") || perfil.Equals("1"))
+					{
+						<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;">Gestão</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Filiais", "Index", "Filial", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Clientes", "Index", "Cliente", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Formas de Pagamento", "Index", "TipoPagamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Serviços", "Index", "Servico", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Profisionais", "Index", "Terapeuta", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Horário de Atendimento", "Index", "HorarioTerapeuta", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Habilidades Profissionais", "Index", "TerapeutaServicos", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Promoções", "Index", "Promocao", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Clientes/Promoções", "Index", "PromocaoClientes", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Fornecedores", "Index", "Fornecedor", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Finanças", "Index", "Lancamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("E-Mails enviados", "Index", "Email", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Gestão do Ponto", "Index", "PontoTerapeuta", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+								</ul>
+							</li>
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;padding-top:40px;">Atendimento</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Agendamentos", "Index", "Agendamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Agenda", "Index", "Calendario", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+								</ul>
+							</li>
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;padding-top:40px;">Relatórios</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Resumo por Profissional", "FinanceiroMassagens", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Serviços Mais Pedidos", "MassagensMaisPedidas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Horários dos Profissionais", "GerarRelatorioHorariosAtendimento", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Horários do Dia", "DisponibilidadeDeTerapeutas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+								</ul>
+							</li>
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;padding-top:40px;">Extras</h2>
+								<ul style="padding-top:20px;">
+									@*<li>@Html.ActionLink("Tarefas", "Index", "Tasks", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>*@
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Contato", "Create", "FaleConosco", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Mensagens do Dia", "Index", "Chat", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;"><a href="http://webmail.corpuspa.com.br">Webmail</a></li>
+									@*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>*@
+									<li style="display:block;width:100%;text-align:left;">&nbsp;</li>
+									@Html.Partial("_LoginPartialCompromise")
+								</ul>
+							</li>
+						</ul>
+					}
+					else
+					if (perfil.Equals("2")) /* 2 - Cliente */
+					{
+						<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+							<li>
+
+								<h2 style="font-family:fantasy;font-size:30px;">Menu de Opções</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Agendar Agora", "Create", "Agendamento", new { area = "" }, null) </li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { area = "" }, null) </li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Disponibilidade", "DisponibilidadeDeTerapeutas", "Relatorio", new { area = "" }, null) </li>
+									<li style="display:block;width:100%;text-align:left;">&nbsp;</li>
+									@Html.Partial("_LoginPartialCompromise")
+								</ul>
+							</li>
+						</ul>
+					}
+					else
+					if (perfil.Equals("3")) /* 3 - Profissional(Ponto) */
+					{
+						<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;">Menu Funcionário</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Marcação do Ponto", "Index", "PontoTerapeuta", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">&nbsp;</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Disponibilidade", "DisponibilidadeDeTerapeutas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Contato", "Create", "FaleConosco", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Mensagens do Dia", "Index", "Chat", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;font-family:monospace;font-size:16px;"><a href="http://webmail.corpuspa.com.br">Webmail</a></li>
+									<li style="display:block;width:100%;text-align:left;">&nbsp;</li>
+									@Html.Partial("_LoginPartialCompromise")
+								</ul>
+							</li>
+						</ul>
+					}
+					else
+					if (perfil.Equals("4")) /* 4 - Gerente */
+					{
+						<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;">Gestão</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Filiais", "Index", "Filial", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Clientes", "Index", "Cliente", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Formas de Pagamento", "Index", "TipoPagamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Serviços", "Index", "Servico", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Profisionais", "Index", "Terapeuta", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Horário de Atendimento", "Index", "HorarioTerapeuta", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Habilidades Profissionais", "Index", "TerapeutaServicos", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Promoções", "Index", "Promocao", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Clientes/Promoções", "Index", "PromocaoClientes", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Fornecedores", "Index", "Fornecedor", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Finanças", "Index", "Lancamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("E-Mails enviados", "Index", "Email", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Gestão do Ponto", "Index", "PontoTerapeuta", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">&nbsp;</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Disponibilidade", "DisponibilidadeDeTerapeutas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+								</ul>
+							</li>
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;padding-top:40px;">Atendimento</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Agendamentos", "Index", "Agendamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Agenda", "Index", "Calendario", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+								</ul>
+							</li>
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;padding-top:40px;">Relatórios</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Resumo por Profissional", "FinanceiroMassagens", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Serviços Mais Pedidos", "MassagensMaisPedidas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Horários dos Profissionais", "GerarRelatorioHorariosAtendimento", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Horários do Dia", "DisponibilidadeDeTerapeutas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("E-Mails enviados", "Index", "Email", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+								</ul>
+							</li>
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;padding-top:40px;">Extras</h2>
+								<ul style="padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Contato", "Create", "FaleConosco", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Mensagens do Dia", "Index", "Chat", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;"><a href="http://webmail.corpuspa.com.br">Webmail</a></li>
+									<li style="display:block;width:100%;text-align:left;">&nbsp;</li>
+									@Html.Partial("_LoginPartialCompromise")
+								</ul>
+							</li>
+						</ul>
+					}
+					else
+					{
+						<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+							<li>
+								<h2 style="font-family:fantasy;font-size:30px;">Menu de Acesso</h2>
+								<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;padding-top:20px;">
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Agendar Agora", "Create", "Agendamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">@Html.ActionLink("Disponibilidade", "DisponibilidadeDeTerapeutas", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
+									<li style="display:block;width:100%;text-align:left;">&nbsp;</li>
+									@Html.Partial("_LoginPartialCompromise")
+								</ul>
+							</li>
+						</ul>
+					}
+				}
+				else
+				{
+					<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+						<li>
+							<h2 style="font-family:fantasy;font-size:30px;">Menu de Acesso</h2>
+							<ul style="padding-top:20px;">
+								@Html.Partial("_LoginPartialCompromise")
+							</ul>
+						</li>
+					</ul>
+				}
+			</div>
+			<div class="col-md-9" id="avm-body" style="padding-top:20px;">
+				@RenderBody()
+			</div>
+		</div>
+		<div class="row" id="avm-footer" style="background-color:#2F4F4F;height:21px;">
+			<p style="color:white;margin-left:4px;text-decoration:none;">&copy; @DateTime.Now.Year - <a href="http://www.avmsistemas.net" style="text-decoration:none;color:white;">AVM Sistemas</a> - [ON: @HttpContext.Current.Application["UsersOnline"]]</p>
+		</div>
+	</div>
+
+	@Scripts.Render("~/bundles/globalize")
+	@Scripts.Render("~/bundles/jquerymaskedinput")
+	@Styles.Render("~/Content/jqueryui")
+	@RenderSection("scripts", required: false)
+	<script type="javascript">
+		$(document).ready(function () {
+		  Globalize.culture("pt-BR");
+		});
+	</script>
+</body>
+</html>

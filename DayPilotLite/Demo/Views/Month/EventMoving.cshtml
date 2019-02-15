@@ -1,0 +1,18 @@
+﻿
+@using DayPilot.Web.Mvc.Events.Month
+
+@section TitleContent {
+
+	AJAX Drag&amp;Drop Event Calendar
+
+}
+
+
+
+        @(Html.DayPilotMonth("dp", new DayPilotMonthConfig { 
+                BackendUrl = Url.Content("~/Month/Backend"),
+                EventMoveHandling = EventMoveHandlingType.CallBack,
+        }))
+
+
+

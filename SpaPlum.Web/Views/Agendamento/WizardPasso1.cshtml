@@ -1,0 +1,55 @@
+﻿@model SpaPlum.Web.Models.AgendamentoModel
+
+@{
+    ViewBag.Title = "Agendamento em 5 passos";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+<div class="form-horizontal">
+    <h4>Agendamento em 5 Passos</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.CodigoAgendamento)
+    @Html.HiddenFor(model => model.NomeCliente)
+    @Html.HiddenFor(model => model.EmailDoCliente)
+    @Html.HiddenFor(model => model.TelefoneDoCliente)
+    @Html.HiddenFor(model => model.ClubeVIP)
+    @Html.HiddenFor(model => model.DataInicial)
+    @Html.HiddenFor(model => model.DataFinal)
+    @Html.HiddenFor(model => model.Valor)
+    @Html.HiddenFor(model => model.Observacao)
+    @Html.HiddenFor(model => model.CodigoStatusAgendamento)
+    @Html.HiddenFor(model => model.CodigoTipoPagamento)
+    @Html.HiddenFor(model => model.IPdoCliente)
+    @Html.HiddenFor(model => model.SessionID)
+    @Html.HiddenFor(model => model.ValorTaxaAdicional)
+
+    <fieldset>
+        <legend>Onde?</legend>
+
+        <div class="form-group">
+            @*
+    @Html.LabelFor(model => model.CodigoFilial, "Filial", htmlAttributes: new { @class = "control-label col-md-2" })
+            *@
+            <div class="col-md-10">
+                @Html.DropDownList("CodigoFilial", new SelectList(ViewBag.ListaFilial, "Value", "Text"), "Selecione a Filial...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })                
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </fieldset>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="PASSO 2" class="btn btn-default btn-success" id="btnPasso3" name="btnPasso3" style="height:40px;width:300px;" />            
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/wizardpasso1")
+}

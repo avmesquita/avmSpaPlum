@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.Log>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/datatables")
+	@Styles.Render("~/Content/datatables")
+
+	<script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tabela-log').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+            });
+
+        });
+	</script>
+}
+<h4 style="text-decoration:underline;">Gestão de Clientes</h4>
+<br />
+<div style="float:right;width:150px;padding-bottom:10px;display:none;">
+	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Novo Cliente" })
+</div>
+<div class="col-md-8">
+	<table id="tabela-log" class="table">
+		<tr>
+			<th></th>
+			<th>
+				@Html.DisplayNameFor(model => model.DataRegistro)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CodigoFilial)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CodigoCliente)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Titulo)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Texto)
+			</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>				
+				@Html.ActionLink(" ", "Details", new { id = item.CodigoLog }, new { @class = "btn btn-primary btn-large glyphicon glyphicon-list-alt", title = "Detalhes" })				
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DataRegistro)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CodigoFilial)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CodigoCliente)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Titulo)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Texto)
+			</td>
+		</tr>
+		}
+
+	</table>
+</div>

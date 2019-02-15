@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.PerfilAcesso>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Gestão de Perfil de Acesso</h4>
+<br />
+<div style="float:right;padding-bottom:10px;padding-right:15px;">
+	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Novo Perfil de Acesso" })
+</div>
+<div class="col-md-12">
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Descricao)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Ativo)
+			</th>
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Descricao)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Ativo)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.CodigoPerfilAcesso }) |
+					@Html.ActionLink("Details", "Details", new { id = item.CodigoPerfilAcesso }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.CodigoPerfilAcesso })
+				</td>
+			</tr>
+		}
+
+	</table>
+</div>

@@ -1,0 +1,50 @@
+﻿@model SpaPlum.Web.Models.AgendamentoModel
+
+@{
+    ViewBag.Title = "Agendamento em 5 passos";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+
+
+<div class="form-horizontal">
+    <h4>Agendamento em 5 Passos</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.CodigoFilial)
+    @Html.HiddenFor(model => model.DataInicial)
+    @Html.HiddenFor(model => model.ItensDoAgendamento)
+
+    <div class="col-md-10">
+        <fieldset>
+            <legend>Preço e Pagamento</legend>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Valor, "0,00", new { htmlAttributes = new { @class = "form-control", @disabled = "disabled", id = "Valor", name = "Valor" } })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CodigoTipoPagamento, "Forma Pagto", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CodigoTipoPagamento", new SelectList(ViewBag.ListaTipoPagamento, "Value", "Text"), "Selecione a forma de pagamento...", new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })
+                    @Html.ValidationMessageFor(model => model.CodigoTipoPagamento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <br /><br />
+    <div class="col-md-10">
+        <br /><br />
+        <input type="submit" value="PASSO 5" class="btn btn-default btn-success" id="btnPasso5" name="btnPasso5" style="height:40px;width:300px;" />
+        <br /><br />
+    </div>
+
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/wizardpasso4")
+}

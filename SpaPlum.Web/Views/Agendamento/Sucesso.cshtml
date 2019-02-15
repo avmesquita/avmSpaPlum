@@ -1,0 +1,79 @@
+﻿@model SpaPlum.Web.Entity.Agendamento
+
+@{
+    ViewBag.Title = "Sucesso no Agendamento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Corpus SPA</h2>
+
+<div>
+    <br />
+    <img src="~/Content/images/icon-success.png" width="50" height="50" alt="sucesso" />
+    <h4>O agendamento foi concluído com sucesso.</h4>
+    <h6>Nossa Central entrará em contato em breve.</h6>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>Local</dt>
+        <dd>@Html.DisplayFor(modelItem => new SpaPlum.Web.Contexto.AgendamentoContexto().FilialModels.Find(Model.CodigoFilial).Nome)</dd>
+
+        <dt>Tratamento</dt>
+        <dd>@* @Html.DisplayFor(modelItem => new SpaPlum.Web.Contexto.AgendamentoContexto().ServicoModels.Find(Model.CodigoServico).Nome)*@</dd>
+
+        <dt>Tipo de Massagem</dt>
+        <dd>
+            @*
+                @switch (Model.TipoDeMassagem)
+                {
+                    case 0: @Html.Raw("Massagem Padrão")
+                        break;
+                    case 1: @Html.Raw("Massagem 4 Mãos")
+                        break;
+                    case 2: @Html.Raw("Massagem Para Casais")
+                        break;
+                }
+            *@
+        </dd>
+
+        <dt>Qtde Períodos</dt>
+        <dd>@*@Html.DisplayFor(modelItem => modelItem.QuantidadePeriodos)*@</dd>
+
+        <dt>Terapeuta</dt>
+        <dd>@*Html.DisplayFor(modelItem => new SpaPlum.Web.Contexto.AgendamentoContexto().TerapeutaModels.Find(Model.CodigoTerapeuta).Nome)*@</dd>
+
+        <dt>&nbsp;</dt>
+        <dd>&nbsp;</dd>
+
+        <dt>Forma de Pagamento</dt>
+        <dd>@Html.DisplayFor(modelItem => new SpaPlum.Web.Contexto.AgendamentoContexto().TipoPagamentoModels.Find(Model.CodigoTipoPagamento).Descricao)</dd>
+
+        <dt>Valor</dt>
+        <dd>@Html.DisplayFor(model => model.Valor)</dd>
+
+        <dt>&nbsp;</dt>
+        <dd>&nbsp;</dd>
+
+        <dt>Nome do Cliente</dt>
+        <dd>@Html.DisplayFor(model => model.NomeCliente)</dd>
+
+        <dt>&nbsp;</dt>
+        <dd>&nbsp;</dd>
+
+        <dt>Data Inicial</dt>
+        <dd>@Html.DisplayFor(model => model.DataInicial)</dd>
+
+        <dt>Data Final</dt>
+        <dd>@Html.DisplayFor(model => model.DataFinal)</dd>
+
+        <dt>&nbsp;</dt>
+        <dd>&nbsp;</dd>
+
+        <dt>Autenticação</dt>
+        <dd>@Html.DisplayFor(model => model.Autenticacao)</dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" ", "Create", "Agendamento", new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Novo Agendamento" })
+</p>

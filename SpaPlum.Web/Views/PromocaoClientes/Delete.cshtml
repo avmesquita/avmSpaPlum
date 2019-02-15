@@ -1,0 +1,65 @@
+﻿@model SpaPlum.Web.Entity.PromocaoCliente
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3 style="color:red;text-align:center;"><b>Tem certeza que deseja excluir?</b></h3>
+<div>
+    <h4 style="text-decoration:underline;">PromocaoCliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt style="font-size:16px;line-height:30px;">
+            @Html.DisplayNameFor(model => model.Promocao.Nome)
+        </dt>
+
+        <dd style="font-size:16px;line-height:30px;">
+            @Html.DisplayFor(model => model.Promocao.Nome)
+        </dd>
+
+        <dt style="font-size:16px;line-height:30px;">
+            @Html.DisplayNameFor(model => model.Motivacao)
+        </dt>
+
+        <dd style="font-size:16px;line-height:30px;">
+            @Html.DisplayFor(model => model.Motivacao)
+        </dd>
+
+        <dt style="font-size:16px;line-height:30px;">
+            @Html.DisplayNameFor(model => model.ContaBeneficiaria)
+        </dt>
+
+        <dd style="font-size:16px;line-height:30px;">
+            @Html.DisplayFor(model => model.ContaBeneficiaria)
+        </dd>
+
+        <dt style="font-size:16px;line-height:30px;">
+            @Html.DisplayNameFor(model => model.QuantidadeMaximaUtilizacoes)
+        </dt>
+
+        <dd style="font-size:16px;line-height:30px;">
+            @Html.DisplayFor(model => model.QuantidadeMaximaUtilizacoes)
+        </dd>
+
+        <dt style="font-size:16px;line-height:30px;">
+            @Html.DisplayNameFor(model => model.DataUltimaUtilizacao)
+        </dt>
+
+        <dd style="font-size:16px;line-height:30px;">
+            @Html.DisplayFor(model => model.DataUltimaUtilizacao)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

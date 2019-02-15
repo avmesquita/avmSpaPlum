@@ -1,0 +1,95 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.AgendamentoItemServico>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datatables")
+    @Styles.Render("~/Content/datatables")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tabela-agendamento-item-servico').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+            });
+
+        });
+    </script>
+}
+
+<h2>Itens de Serviço do Agendamento</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="tabela-agendamento-item-servico" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Agendamento.NomeCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoServico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorComissaoEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorComissaoTerapeuta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmPromocao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TempoAproximadoDoServico)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agendamento.NomeCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoServico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorComissaoEmpresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorComissaoTerapeuta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmPromocao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TempoAproximadoDoServico)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CodigoAgendamentoItemServico }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CodigoAgendamentoItemServico }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CodigoAgendamentoItemServico })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

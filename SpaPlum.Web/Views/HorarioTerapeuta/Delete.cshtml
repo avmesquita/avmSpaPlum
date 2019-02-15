@@ -1,0 +1,57 @@
+﻿@model SpaPlum.Web.Entity.HorarioTerapeuta
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-md-8">
+    <h3 style="color:red;text-align:center;"><b>Tem certeza que deseja excluir?</b></h3>
+    <div>
+        <h4 style="text-decoration:underline;">Detalhe do Horário</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.Terapeuta.Nome)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.Terapeuta.Nome)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.CodigoDiaDaSemana)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Enum.GetName(typeof(SpaPlum.Web.Entity.DiaDaSemana), Model.CodigoDiaDaSemana)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.HorarioInicio)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.HorarioInicio)
+            </dd>
+
+            <dt style="font-size:16px;line-height:30px;">
+                @Html.DisplayNameFor(model => model.HorarioFim)
+            </dt>
+
+            <dd style="font-size:16px;line-height:30px;">
+                @Html.DisplayFor(model => model.HorarioFim)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-top:30px;text-align:center;">
+            <input type="submit" value="Excluir" class="btn btn-default btn-primary btn-danger" />&nbsp;&nbsp;@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btn-info", title = "Voltar" })
+        </div>
+
+}
+    </div>
+</div>

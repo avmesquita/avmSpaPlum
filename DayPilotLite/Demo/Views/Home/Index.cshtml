@@ -1,0 +1,31 @@
+﻿
+@using DayPilot.Web.Mvc.Enums.Calendar
+@using DayPilot.Web.Mvc.Events.Calendar
+
+@section TitleContent {
+	DayPilot Lite for ASP.NET MVC Demo
+}
+
+
+<table class="table-front">
+    <tr>
+        <td>
+            <a href='@Url.Content("~/Calendar/")'><img src='@Url.Content("~/Media/layout/home/calendar-270x150.png")' alt="DayPilot Calendar for ASP.NET Demo" /></a><br />
+            <br />
+            <a href='@Url.Content("~/Calendar/")'><b>DayPilot Calendar</b> Demo</a><br />
+            Outlook-like day/week view. Customizable columns.
+        </td>
+        <td>
+            <a href='@Url.Content("~/Month/")'><img src='@Url.Content("~/Media/layout/home/month-270x150.png")' alt="DayPilot Month for ASP.NET Demo" /></a><br />
+            <br />
+            <a href='@Url.Content("~/Month/")'><b>DayPilot Month</b> Demo</a><br />
+            Outlook-like month view.
+        </td>
+        <td>
+            <a href='@Url.Content("~/Scheduler/")'><img src='@Url.Content("~/Media/layout/home/scheduler-270x150.png")' alt="DayPilot Scheduler for ASP.NET Demo"/></a><br />
+            <br />
+            <a href='@Url.Content("~/Scheduler/")'><b>DayPilot Scheduler</b> Demo</a><br />
+            A time line for multiple resources.
+        </td>
+    </tr>
+</table>

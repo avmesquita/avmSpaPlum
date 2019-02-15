@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.TaskEntity>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datatables")
+    @Styles.Render("~/Content/datatables")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tabela-tasks').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+            });
+
+        });
+    </script>
+}
+<h2>Tarefas</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="tabela-tasks" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Codigo }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Codigo }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Codigo })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

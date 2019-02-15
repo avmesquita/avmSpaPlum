@@ -1,0 +1,58 @@
+﻿@model SpaPlum.Web.Entity.HorarioTerapeuta
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-8">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4 style="text-decoration:underline;">Horario Terapeuta</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(m => m.CodigoTerapeuta)
+
+            @Html.HiddenFor(model => model.CodigoHorarioTerapeuta)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CodigoDiaDaSemana, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CodigoDiaDaSemana", new SelectList(ViewBag.ListaDiaDaSemana, "Value", "Text", Model.CodigoDiaDaSemana), new { htmlAttributes = new { @class = "form-control" }, style = "width:600px;height:33px;" })
+                    @Html.ValidationMessageFor(model => model.CodigoDiaDaSemana, "Você deve selecionar um dia da semana para prosseguir.", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HorarioInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HorarioInicio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HorarioInicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HorarioFim, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HorarioFim, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HorarioFim, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Gravar" class="btn btn-default btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink(" ", "Index", null, new { @class = "btn btn-default btn-warning glyphicon glyphicon-arrow-left", title = "Voltar" })
+    </div>
+</div>

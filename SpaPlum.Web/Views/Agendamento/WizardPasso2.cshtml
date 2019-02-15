@@ -1,0 +1,56 @@
+﻿@model SpaPlum.Web.Models.AgendamentoModel
+
+@{
+    ViewBag.Title = "Agendamento em 5 passos";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+
+@using (Html.BeginForm("ActionWizardPasso2", "Agendamento", Model, FormMethod.Post, null))
+{
+    <div class="form-horizontal">
+        <h4>Agendamento em 5 Passos</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.CodigoFilial)
+
+        @*
+            <fieldset>
+                <legend>Dados já selecionados</legend>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <b>Local:</b> @Html.DisplayFor(model => model.CodigoFilial, new { htmlAttributes = new { @class = "form-control" } })<br />
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </fieldset>
+            <hr />
+        *@
+
+        <fieldset>
+            <legend>Quando?</legend>
+            <div class="form-group">
+                @*
+                    @Html.LabelFor(model => model.DataInicial, "Selecione a data:", htmlAttributes: new { @class = "control-label col-md-2" })
+                *@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DataInicial, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DataInicial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </fieldset>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="PASSO 3" class="btn btn-default btn-success" id="btnPasso3" name="btnPasso3" style="height:40px;width:300px;" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/wizardpasso2")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Styles.Render("~/Content/datetimepicker")
+}

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SpaPlum.Web.Entity.CarrinhoItem>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Servico.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Terapeuta.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoCarrinho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoDeMassagem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QtdePeriodos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servico.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Terapeuta.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoCarrinho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoDeMassagem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QtdePeriodos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preco)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CodigoCarrinhoItem }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CodigoCarrinhoItem }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CodigoCarrinhoItem })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,67 @@
+﻿@model SpaPlum.Web.Entity.CarrinhoItem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CarrinhoItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Servico.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servico.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Terapeuta.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Terapeuta.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoCarrinho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoCarrinho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDeMassagem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDeMassagem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdePeriodos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QtdePeriodos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preco)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoCarrinhoItem }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

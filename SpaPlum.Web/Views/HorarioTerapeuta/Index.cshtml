@@ -1,0 +1,161 @@
+﻿@model SpaPlum.Web.Models.FiltroAgendamentoViewModel
+@{
+	ViewBag.Title = "Gestão de Horário de Atendimento";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Gestão de Horário de Atendimento</h4>
+<br />
+<div class="col-md-12">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<hr />
+			<h4>@Html.Label("Filtro")</h4>
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+			<div style="padding-top:10px;">
+				<div class="form-group">
+					@Html.Label("Filial", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("CodigoFilial", new SelectList(ViewBag.ListaFilial, "Value", "Text"), "Selecione a Filial...", new { htmlAttributes = new { @class = "form-control" }, style = "width:500px;height:33px;" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.Label("Terapeuta", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("CodigoTerapeuta", new SelectList(ViewBag.ListaTerapeuta, "Value", "Text"), "Selecione a Terapeuta...", new { htmlAttributes = new { @class = "form-control" }, style = "width:500px;height:33px;" })
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group" style="padding-top:30px;text-align:center;">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="button" value="Exibir Horários" id="btnGerar" class="btn btn-default btn-primary" title="Exibir horários de atendimento da terapeuta selecionada." />
+				</div>
+			</div>
+		</div>
+	}
+
+	<div id="conteudo" name="conteudo">
+
+	</div>
+
+</div>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/datatables")
+	@Styles.Render("~/Content/datatables")
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#tabela-horario-atendimento').DataTable({
+				"language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
+			});
+
+			$("#CodigoFilial").focus();
+
+			$('#CodigoFilial').change(function () {
+				$.ajax({
+					url: '/Agendamento/TerapeutasPorFilial',
+					type: 'POST',
+					data: { codigoFilial: $(this).val() },
+					datatype: 'json',
+					success: function (data) {
+						var options = '';
+						$.each(data, function () {
+							options += '<option value="' + this.CodigoTerapeuta + '">' + this.Nome + '</option>';
+						});
+						$('#CodigoTerapeuta').prop('disabled', false).html(options);
+					}
+				});
+			});
+
+			$('#btnGerar').click(function (e) {
+				e.preventDefault();
+				$.ajax({
+					url: '/HorarioTerapeuta/Lista',
+					type: 'GET',
+					data: { 'CodigoTerapeuta': $('#CodigoTerapeuta').val() },
+					datatype: 'html',
+					success: function (data) {
+						var options = '';
+						$("#conteudo").html(data);
+					},
+					error: function (xhr, status, error) {
+						$("#conteudo").html(xhr);
+					}
+				});
+			});
+
+			$('#btnNovo').click(function (e) {
+				e.preventDefault();
+				$.ajax({
+					url: '/HorarioTerapeuta/Create',
+					type: 'GET',
+					data: { 'CodigoTerapeuta': $('#CodigoTerapeuta').val() },
+					datatype: 'html',
+					success: function (data) {
+						var options = '';
+						$("#conteudo").html(data);
+					},
+					error: function (xhr, status, error) {
+						$("#conteudo").html(xhr);
+					}
+				});
+			});
+
+
+			$('#btnEditar').click(function (e) {
+				e.preventDefault();
+				$.ajax({
+					url: '/HorarioTerapeuta/Edit',
+					type: 'GET',
+					data: { 'CodigoTerapeuta': $('#CodigoTerapeuta').val() },
+					datatype: 'html',
+					success: function (data) {
+						var options = '';
+						$("#conteudo").html(data);
+					},
+					error: function (xhr, status, error) {
+						$("#conteudo").html(xhr);
+					}
+				});
+			});
+
+			$('#btnExcluir').click(function (e) {
+				e.preventDefault();
+				$.ajax({
+					url: '/HorarioTerapeuta/Delete',
+					type: 'GET',
+					data: { 'CodigoTerapeuta': $('#CodigoTerapeuta').val() },
+					datatype: 'html',
+					success: function (data) {
+						var options = '';
+						$("#conteudo").html(data);
+					},
+					error: function (xhr, status, error) {
+						$("#conteudo").html(xhr);
+					}
+				});
+			});
+		});
+
+					/*
+								$.validator.methods.range = function (value, element, param) {
+									var val = $.global.parseFloat(value);
+									return this.optional(element) || (val >= param[0] && val <= param[1]);
+								}
+
+								$.validator.methods.number = function (value, element) {
+									return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+								}
+					 */
+	</script>
+}
