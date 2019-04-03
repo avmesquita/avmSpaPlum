@@ -1,1 +1,0 @@
-We support frozen column for easy scrolling of long columns

@@ -1,3 +1,0 @@
-Advanced master detail with editing on detail 
-Please, take a look at the code.
-

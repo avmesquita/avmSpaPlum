@@ -1,2 +1,0 @@
-Export with summary row is supported.
-Try to filter records and then export it - now we export only the filtered records.

@@ -1,1 +1,0 @@
- We have added a filterInput method which allow with single value to filter on all fields in the grid. Works only when datatype is local. 

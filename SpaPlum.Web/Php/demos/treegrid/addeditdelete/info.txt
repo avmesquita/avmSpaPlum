@@ -1,1 +1,0 @@
-Adding, updating and deleting nodes is possible with form edit

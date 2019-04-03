@@ -1,3 +1,0 @@
-We have added grid option menubar which if set to true will enable custom menuaction  at grid caption
-
-With menubarAdd we define the same actions

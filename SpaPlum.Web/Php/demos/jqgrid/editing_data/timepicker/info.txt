@@ -1,2 +1,0 @@
-Time picker integration in edit module
-Please, refer to the PHP tab for the javascript sample.

@@ -1,2 +1,0 @@
-In search dialog we can add a custom button with action
-This is done in search options property <b>buttons</b>

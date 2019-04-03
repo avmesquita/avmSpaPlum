@@ -1,1 +1,0 @@
-Deleting nodes is supported on both models.

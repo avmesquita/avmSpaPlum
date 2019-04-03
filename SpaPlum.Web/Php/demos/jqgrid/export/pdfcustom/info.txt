@@ -1,2 +1,0 @@
-We can create the grid manually with javascript and invoke the export command with custom export.
-Try to filter records and then export it - now we export only the filtered records.

@@ -1,3 +1,0 @@
-One way to make automatic  calculations  at client side is to use serializeEditData.
-Note that we post thea ready updated data to theserver
-

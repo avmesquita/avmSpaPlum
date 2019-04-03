@@ -1,1 +1,0 @@
-The search can be invoked dynamically upon grid load. Just set search to true and the criteria.

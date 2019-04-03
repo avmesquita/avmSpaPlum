@@ -1,3 +1,0 @@
-Drag and drop between grids.
-Try to drag a row from grid top to grid below.
-Script uses a server side adding and dropping
