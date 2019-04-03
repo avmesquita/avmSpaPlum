@@ -1,0 +1,22 @@
+<h1>Empresa</h1>
+
+<p *ngIf="!empresas"><em>Loading...</em></p>
+
+<table class='table table-striped' *ngIf="empresas">
+  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th>Razão Social</th>
+      <th>CNPJ</th>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let empresa of empresas">
+      <td>{{ empresa.CodigoEmpresa }}</td>
+      <td>{{ empresa.RazaoSocial }}</td>
+      <td>{{ empresa.CNPJ }}</td>
+      <td>{{ empresa.Nome }}</td>
+    </tr>
+  </tbody>
+</table>
