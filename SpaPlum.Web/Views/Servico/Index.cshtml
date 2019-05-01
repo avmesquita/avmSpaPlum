@@ -6,29 +6,14 @@
 	ViewBag.Title = "Listagem de Serviços";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@section Scripts {
-	@Scripts.Render("~/bundles/jqueryval")
-	@Scripts.Render("~/bundles/bootstrap")
-	@Scripts.Render("~/bundles/datatables")
-	@Styles.Render("~/Content/datatables")
 
-	<script type="text/javascript">
-		$(document).ready(function () {
-
-			$('#tabela-servicos').DataTable({
-				"language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
-			});
-
-		});
-	</script>
-}
 <h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Gestão de Serviços</h4>
 <br />
 <div style="float:right;padding-bottom:10px;padding-right:15px;">
-	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Novo Serviço" })
+	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success fas fa-plus", title = "Cadastrar Novo Serviço" })
 </div>
-<div class="col-md-12">
-	<table id="tabela-servicos" class="table">
+<div class="container">
+	<table id="tabela-servicos" class="table table-hover">
 		<thead>
 			<tr>
 				<th></th>

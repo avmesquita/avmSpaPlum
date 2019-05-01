@@ -12,14 +12,7 @@
 	-->
 @if (User.Identity.IsAuthenticated)
 {
-	<div class="col-md-6">
-		<h2 style="zoom:100%;"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Visite-nos:</h2>
-		<p style="text-align:center;">
-			<br />
-			<h3 style="text-align:center;"><a href="http://www.corpuspa.com.br/">www.corpuspa.com.br</a></h3>
-		</p>
-	</div>
-	<div class="col-md-6">
+	<div class="col-md-8 pt-3">
 		<h2 style="zoom:100%;"><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp;Rápido e Prático</h2>
 		<p>
 			<br />
@@ -30,77 +23,11 @@
 }
 @if (!User.Identity.IsAuthenticated)
 {
-	<div class="col-md-6">
-		<h2 style="zoom:100%;"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Visite-nos:</h2>
-		<p style="text-align:center;">
-			<br />
-			<h3 style="text-align:center;"><a href="http://www.corpuspa.com.br/" target="_blank">www.corpuspa.com.br</a></h3>
-		</p>
-	</div>
-	<div class="col-md-6">
-		<h2 style="zoom:100%;"><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp;Cadastre-se & VIP!</h2>
+	<div class="col-md-8 pt-3">
+		<h2 style="zoom:100%;"><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp;Cadastre-se na plataforma de serviços Spa Plum!</h2>
 		<p>
 			<br />
 			<input type="button" onclick="javascript:window.location='/Account/Register'" value="CADASTRE-SE" class="btn btn-default btn-info" />&nbsp;&nbsp;<input type="button" onclick="javascript:window.location='/Account/Login'" value="ENTRAR" class="btn btn-default" />
 		</p>
 	</div>
 }
-
-<div class="col-md-6" style="padding-top:30px;">
-	<h2 style="zoom:100%;text-align:left;"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Niterói</h2>
-	<p style="font-family:fantasy;font-size:16px;">
-		<br />
-		Rua Doutor Borman, 43<br /> Salas 1103 e 1104<br />
-		Centro - Niterói - RJ<br />
-		CEP 24020-320
-	</p>
-</div>
-<div class="col-md-6" style="padding-top:30px;">
-	<h2 style="text-align:left;"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Copacabana</h2>
-	<p style="font-family:fantasy;font-size:16px;">
-		<br />
-		Av. N.Sra.Copacabana, 647<br /> Salas 1106 e 1107<br />
-		Copacabana - Rio de Janeiro - RJ<br />
-		CEP 22020-001
-	</p>
-</div>
-
-<div class="col-md-12" style="padding-top:10px;">
-	<hr />
-	<center>
-		<h2 style="zoom:100%;"><i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;Atendimento</h2>
-		<p>
-			<br />
-			<a href="callto://+552136204308" style="font-family:fantasy;font-size:18px;font-style:normal;">(21) 3620-4308</a><br>
-			<br />
-			<a href="callto://+5521990644834" style="font-family:fantasy;font-size:18px;font-style:normal;">(21) 9-9064-4834</a><br>
-			<br />
-		</p>
-	</center>
-</div>
-<div class="col-md-8" style="display:none;">
-	<br /><br />
-	<center><h2 style="zoom:70%;"><i class="fa fa-world" aria-hidden="true"></i>&nbsp;Conheça Nosso Portal</h2></center>
-	<br />
-	<center><h5><a href="http://www.corpuspa.com.br" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size:x-large;">www.corpuspa.com.br</a></h5></center>
-</div>
-
-@*
-	<div class="row" style="zoom:70%;">
-		<div class="col-md-6">
-			<h2 style="zoom:90%;"><i class="fa fa-map-signs" aria-hidden="true"></i>&nbsp;Onde nos encontrar em Niterói:</h2>
-			<p>
-				<br />
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.4724075711333!2d-43.12323018494474!3d-22.89594014324039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9983c344ad663f%3A0x8c664c0828e1a43d!2sR.+Dr.+Bormann%2C+43+-+Centro%2C+Niter%C3%B3i+-+RJ%2C+24020-320!5e0!3m2!1spt-BR!2sbr!4v1481266675043" width="90%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-			</p>
-		</div>
-		<div class="col-md-6">
-			<h2 style="zoom:90%;"><i class="fa fa-map-signs" aria-hidden="true"></i>&nbsp;Onde nos encontrar em Copacabana:</h2>
-			<p>
-				<br />
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.4408290703745!2d-43.18843458503306!3d-22.970811684979342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bd5452ffc0df5%3A0xa612562f6f4e84a6!2sAv.+Nossa+Sra.+de+Copacabana%2C+647+-+Copacabana%2C+Rio+de+Janeiro+-+RJ%2C+22020-001!5e0!3m2!1spt-BR!2sbr!4v1485273876867" width="90%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-			</p>
-		</div>
-
-	</div>
-*@

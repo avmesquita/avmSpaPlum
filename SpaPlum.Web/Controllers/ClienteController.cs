@@ -88,6 +88,7 @@ namespace SpaPlum.Web.Controllers
                     registro.Sobrenome = cliente.Nome.Split(' ').Count() > 1 ? cliente.Nome.Split(' ')[1] : "";
                     registro.CodigoCliente = cliente.CodigoCliente;
                     registro.CodigoPerfil = 1;
+					registro.CodigoEmpresa = cliente.CodigoEmpresa;
                     new AccountController().SimpleRegisterNoSignin(registro);
                 }
                 else

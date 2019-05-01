@@ -2,12 +2,12 @@
 
 <div style="float:right;padding-bottom:10px;padding-right:15px;">
 	@*Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Novo Horário de Atendimento" })*@
-	@Html.ActionLink(" ", "Create", "HorarioTerapeuta", "http", "localhost", "conteudo", new { CodigoTerapeuta = ViewBag.CodigoTerapeuta }, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Novo Horário de Atendimento" })
+	@Html.ActionLink(" ", "Create", "HorarioTerapeuta", "http", "localhost", "conteudo", new { CodigoTerapeuta = ViewBag.CodigoTerapeuta }, new { @class = "btn btn-primary btn-large btn-success fas fa-plus", title = "Cadastrar Novo Horário de Atendimento" })
 </div>
-<div class="col-md-12">
+<div class="container">
 	@if (Model.Count() > 0)
 	{
-		<table id="tabela-horario-atendimento" class="table">
+		<table id="tabela-horario-atendimento" class="table table-hover">
 			<thead>
 				<tr>
 					<th></th>

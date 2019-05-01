@@ -19,7 +19,7 @@ namespace SpaPlum.Web.Contexto
 		{
 			base.OnModelCreating(modelBuilder);
 
-			PrepareDatabase();
+			//PrepareDatabase();
 
 			modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 			modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
@@ -63,33 +63,7 @@ namespace SpaPlum.Web.Contexto
 			/*          O "scaffolding" do gerador auto-instancia o contexto, chamando OnModelCreating(). */
 			if (PlanoModels.ToList().Count() == 0)
 			{
-				Plano planoGratis = new Plano
-				{
-					Descricao = "Plano gratuito (default)",
-					Nome = "Plano gratuito pessoal",
-					Preco = 0,
-					VigenciaInicio = new DateTime(2018, 09, 13),
-					VigenciaFim = null
-				};
-				PlanoModels.Add(planoGratis);
-				this.SaveChanges();
-
-				if (EmpresaModels.ToList().Count() == 0)
-				{
-					Empresa empresaPrincipal = new Empresa
-					{
-						Ativo = true,
-						CNPJ = "023051676000100",
-						CodigoPlano = planoGratis.CodigoPlano,
-						DataCadastro = DateTime.Now,
-						Email = "contato@avmsistemas.net",
-						Nome = "AVM Sistemas",
-						Plano = planoGratis,
-						RazaoSocial = "ANDRE VELOSO DE MESQUITA MEI",
-						Telefone = "21986415221"
-					};
-					EmpresaModels.Add(empresaPrincipal);
-				}
+				
 				if (PerfilAcessoModels.ToList().Count() == 0)
 				{
 					PerfilAcesso perfilAcessoDev = new PerfilAcesso

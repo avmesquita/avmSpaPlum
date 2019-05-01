@@ -2,22 +2,29 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 	<meta name="google-site-verification" content="218F0j2ZoGWReVWzfB4g-ihhscB6wJv9r6g2RDIsPfA" />
 	<title>SpaPlum - Agendamento de Serviços - @ViewBag.Title</title>
 	<meta name="description" content="SpaPlum é um gerenciador de agendamento para execução de serviços para seu controle" />
-	<meta name="keywords" content="serviços, agendamento, prático, simples, fácil gestão, pessoa, empresa">
-	<meta name="robots" content="index,nofollow">
-	<meta http-equiv="content-language" content="pt-br">
+	<meta name="keywords" content="serviços, agendamento, prático, simples, fácil gestão, pessoa, empresa" />
+	<meta name="robots" content="index,nofollow" />
+	<meta http-equiv="content-language" content="pt-br" />
+	<meta rel="manifest" href="/manifest.json" />
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 	@Styles.Render("~/Content/cssCompromise")
 
 	@Scripts.Render("~/bundles/modernizr")
-	@Scripts.Render("~/bundles/jquery")
-	@Scripts.Render("~/bundles/jqueryval")
-	@Scripts.Render("~/bundles/moment")
-	@Scripts.Render("~/bundles/bootstrap")
+
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<script type='application/ld+json'>
 		{
@@ -115,13 +122,12 @@
 			</style>
 
 			<div class="row" id="avm-menu" style="background-color:#2F4F4F;color:white;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;border-bottom:solid;border-bottom-color:#FF7900;">
-				<ul style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
+				<ul class="col-md-12" style="list-style-type: none;margin: 0;padding: 0;overflow: hidden;">
 					<li class="active" style="display:inline;">
 						@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)
 					</li>
-
 					@if (HttpContext.Current.User.Identity.IsAuthenticated)
-		{
+					{
 						<li style="display:inline;">@Html.ActionLink("Agendar Agora", "Create", "Agendamento", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
 
 						<li style="display:inline;">@Html.ActionLink("Tabela de Preços", "GerarTabelaDePrecos", "Relatorio", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>
@@ -130,7 +136,6 @@
 
 						@Html.Partial("_LoginPartialCompromiseMenu")
 					}
-
 					@*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })</li>*@
 				</ul>
 			</div>
@@ -325,14 +330,6 @@
 		</div>
 	</div>
 
-	@Scripts.Render("~/bundles/globalize")
-	@Scripts.Render("~/bundles/jquerymaskedinput")
-	@Styles.Render("~/Content/jqueryui")
 	@RenderSection("scripts", required: false)
-	<script type="javascript">
-		$(document).ready(function () {
-		  Globalize.culture("pt-BR");
-		});
-	</script>
 </body>
 </html>

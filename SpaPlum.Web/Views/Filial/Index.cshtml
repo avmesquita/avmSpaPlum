@@ -3,68 +3,52 @@
 @model IPagedList<SpaPlum.Web.Entity.Filial>
 
 @{
-    ViewBag.Title = "Listagem de Filiais";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewBag.Title = "Listagem de Filiais";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/datatables")
-    @Styles.Render("~/Content/datatables")
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#tabela-filiais').DataTable({
-                "language": { "url": "/Scripts/DataTables/Portuguese-Brasil.json" }
-            });
-
-        });
-    </script>
-}
 <h4 style="text-decoration:none;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:24px;padding-left:20px;">Gestão de Filiais</h4>
 <br />
 <div style="float:right;padding-bottom:10px;padding-right:15px;">
-   @Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Nova Filial" })
+	@Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success fas fa-plus", title = "Cadastrar Nova Filial" })
 </div>
-<div class="col-md-12">
-    <table id="tabela-filiais" class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>
-                    Código
-                </th>
-                <th>
-                    Nome
-                </th>
-                <th>
-                    Ativo
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(" ", "Edit", new { id = item.CodigoFilial }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })
-                        @Html.ActionLink(" ", "Details", new { id = item.CodigoFilial }, new { @class = "btn btn-primary btn-large glyphicon glyphicon-list-alt", title = "Detalhes" })
-                        @Html.ActionLink(" ", "Delete", new { id = item.CodigoFilial }, new { @class = "btn btn-large btn-danger glyphicon glyphicon-trash", title = "Excluir" })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CodigoFilial)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ativo)
-                    </td>
-                </tr>
-            }
-        </tbody>
+<div class="container">
+	<table id="tabela-filiais" class="table table-hover">
+		<thead>
+			<tr>
+				<th></th>
+				<th>
+					Código
+				</th>
+				<th>
+					Nome
+				</th>
+				<th>
+					Ativo
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.ActionLink(" ", "Edit", new { id = item.CodigoFilial }, new { @class = "btn btn-warning btn-large glyphicon glyphicon-pencil", title = "Editar" })
+						@Html.ActionLink(" ", "Details", new { id = item.CodigoFilial }, new { @class = "btn btn-primary btn-large glyphicon glyphicon-list-alt", title = "Detalhes" })
+						@Html.ActionLink(" ", "Delete", new { id = item.CodigoFilial }, new { @class = "btn btn-large btn-danger glyphicon glyphicon-trash", title = "Excluir" })
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.CodigoFilial)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Nome)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Ativo)
+					</td>
+				</tr>
+			}
+		</tbody>
 
-    </table>
+	</table>
 </div>

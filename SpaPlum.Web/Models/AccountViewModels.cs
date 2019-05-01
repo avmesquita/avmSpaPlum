@@ -89,7 +89,10 @@ namespace SpaPlum.Web.Models
         [Display(Name = "Referência Cliente")]
         public int CodigoCliente { get; set; }
 
-        [Display(Name = "Perfil de Acesso")]
+		[Display(Name = "Referência Empresa")]
+		public int CodigoEmpresa { get; set; }
+
+		[Display(Name = "Perfil de Acesso")]
         public int CodigoPerfil { get; set; }
 
 		[Display(Name = "Referência Funcionário")]

@@ -4,29 +4,13 @@
     ViewBag.Title = "Listagem de Status de Agendamento";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/datatables")
-    @Styles.Render("~/Content/datatables")
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#tabela-status-agendamento').DataTable({
-                "language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
-            });
-
-        });
-    </script>
-}
 <h4 style="text-decoration:underline;">Gestão de Filiais</h4>
 <br />
 <div style="float:right;width:150px;padding-bottom:10px;">
-    @Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success glyphicon glyphicon-plus-sign", title = "Cadastrar Novo Status de Agendamento" })
+    @Html.ActionLink(" ", "Create", null, new { @class = "btn btn-primary btn-large btn-success fas fa-plus", title = "Cadastrar Novo Status de Agendamento" })
 </div>
-<div class="col-md-8">
-    <table id="tabela-status-agendamento" class="table">
+<div class="container">
+    <table id="tabela-status-agendamento" class="table table-hover">
         <thead>
             <tr>
                 <th>

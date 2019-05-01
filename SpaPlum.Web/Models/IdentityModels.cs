@@ -15,6 +15,7 @@ namespace SpaPlum.Web.Models
         public int CodigoCliente { get; set; }
         public int CodigoPerfil { get; set; }
 		public int CodigoTerapeuta { get; set; }
+		public int CodigoEmpresa { get; set; }
 
 		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -27,6 +28,7 @@ namespace SpaPlum.Web.Models
             userIdentity.AddClaim(new Claim("CodigoCliente", this.CodigoCliente.ToString()));
             userIdentity.AddClaim(new Claim("CodigoPerfil",  this.CodigoPerfil.ToString()));
 			userIdentity.AddClaim(new Claim("CodigoTerapeuta", this.CodigoTerapeuta.ToString()));
+			userIdentity.AddClaim(new Claim("CodigoEmpresa", this.CodigoEmpresa.ToString()));
 
 			return userIdentity;
         }

@@ -14,6 +14,7 @@ namespace SpaPlum.Service.Models
 		public int CodigoCliente { get; set; }
 		public int CodigoPerfil { get; set; }
 		public int CodigoTerapeuta { get; set; }
+		public int CodigoEmpresa { get; set; }
 	}
 
 	public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

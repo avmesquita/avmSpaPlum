@@ -34,7 +34,12 @@ namespace SpaPlum.Web.Models
             var claim = ((ClaimsIdentity)user.Identity).FindFirst("CodigoCliente");
             return claim == null ? null : claim.Value;
         }
-        public static string GetCodigoPerfil(this IPrincipal user)
+		public static string GetCodigoEmpresa(this IPrincipal user)
+		{
+			var claim = ((ClaimsIdentity)user.Identity).FindFirst("CodigoEmpresa");
+			return claim == null ? null : claim.Value;
+		}
+		public static string GetCodigoPerfil(this IPrincipal user)
         {
             var claim = ((ClaimsIdentity)user.Identity).FindFirst("CodigoPerfil");
             return claim == null ? null : claim.Value;

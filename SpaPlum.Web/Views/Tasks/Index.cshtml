@@ -4,23 +4,6 @@
     ViewBag.Title = "Tarefas";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/datatables")
-    @Styles.Render("~/Content/datatables")
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#tabela-minhas-tarefas').DataTable({
-                "language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
-            });
-
-        });
-    </script>
-}
-
 <h2>Minhas Tarefas</h2>
 
 <p>

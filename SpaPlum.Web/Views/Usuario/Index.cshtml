@@ -6,27 +6,12 @@
 	ViewBag.Title = "Gestão de Usuários";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@section Scripts {
-	@Scripts.Render("~/bundles/jqueryval")
-	@Scripts.Render("~/bundles/bootstrap")
-	@Scripts.Render("~/bundles/datatables")
-	@Styles.Render("~/Content/datatables")
 
-	<script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#tabela-usuarios').DataTable({
-                "language": { "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json" }
-            });
-
-        });
-	</script>
-}
 <h4 style="text-decoration:underline;">Gestão de Usuários</h4>
 <br />
 
-<div class="col-md-8">
-	<table id="tabela-usuarios" class="table">
+<div class="container">
+	<table id="tabela-usuarios" class="table table-hover">
 		<thead>
 			<tr>
 				<th></th>

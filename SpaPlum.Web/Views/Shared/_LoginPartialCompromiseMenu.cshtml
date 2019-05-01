@@ -5,20 +5,25 @@
 	{
 		@Html.AntiForgeryToken()
 		<li style="display:inline;float:right;">
+			@Html.ActionLink("Contato", "Contact", "Home", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })
+		</li>
+		<li style="display:inline;float:right;font-family:monospace;font-size:16px;"><a href="javascript:document.getElementById('logoutForm').submit()">Sair</a></li>
+		<li style="display:inline;float:right;">
 			@{
 				var nome = SpaPlum.Web.Models.UserExtendedModel.GetNome(HttpContext.Current.User); //new SpaPlum.Web.Controllers.AccountController().getClaimNome();
 				var email = User.Identity.GetUserName();
 				var display = (!string.IsNullOrEmpty(nome) ? nome : email);
 			}
 
-			@Html.ActionLink("Olá, " + display + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-		</li>
-		<li style="display:inline;float:right;"><a href="javascript:document.getElementById('logoutForm').submit()">Sair</a></li>
+			@Html.ActionLink("Olá, " + display + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "font-family:monospace;font-size:16px;" })
+		</li>		
 	}
 }
 else
 {
-	<li style="display:inline;">@Html.ActionLink("Cadastrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-	<li style="display:inline;">@Html.ActionLink("Entrar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-
+	<li style="display:inline;float:right;">
+		@Html.ActionLink("Contato", "Contact", "Home", new { area = "" }, new { style = "font-family:monospace;font-size:16px;" })
+	</li>
+	<li style="display:inline;">@Html.ActionLink("Cadastrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", style = "font-family:monospace;font-size:16px;" })</li>
+	<li style="display:inline;">@Html.ActionLink("Entrar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", style = "font-family:monospace;font-size:16px;" })</li>
 }
